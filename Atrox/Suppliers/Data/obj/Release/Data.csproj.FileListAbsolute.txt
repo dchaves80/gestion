@@ -1,0 +1,6 @@
+C:\DNN\DesktopModules\Atrox\Suppliers\Data\obj\Release\Data.csprojResolveAssemblyReference.cache
+C:\DNN\DesktopModules\Atrox\Suppliers\Data\bin\Release\Data2.dll.config
+C:\DNN\DesktopModules\Atrox\Suppliers\Data\bin\Release\Data2.dll
+C:\DNN\DesktopModules\Atrox\Suppliers\Data\bin\Release\Data2.pdb
+C:\DNN\DesktopModules\Atrox\Suppliers\Data\obj\Release\Data2.dll
+C:\DNN\DesktopModules\Atrox\Suppliers\Data\obj\Release\Data2.pdb

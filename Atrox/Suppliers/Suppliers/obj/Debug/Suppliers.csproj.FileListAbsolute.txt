@@ -1,0 +1,5 @@
+C:\DNN\DesktopModules\Atrox\bin\Suppliers.dll
+C:\DNN\DesktopModules\Atrox\bin\Suppliers.pdb
+C:\DNN\DesktopModules\Atrox\Suppliers\Suppliers\obj\Debug\Suppliers.csprojResolveAssemblyReference.cache
+C:\DNN\DesktopModules\Atrox\Suppliers\Suppliers\obj\Debug\Suppliers.dll
+C:\DNN\DesktopModules\Atrox\Suppliers\Suppliers\obj\Debug\Suppliers.pdb
