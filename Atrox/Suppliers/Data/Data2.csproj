@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\..\..\bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -24,14 +24,23 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\..\..\bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DotNetNuke">
+      <HintPath>..\..\..\..\bin\DotNetNuke.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationBlocks.Data">
+      <HintPath>..\..\..\..\bin\Microsoft.ApplicationBlocks.Data.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -39,12 +48,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class\Struct_DetalleFactura.cs" />
+    <Compile Include="Class\Struct_Factura.cs" />
+    <Compile Include="Class\Struct_Producto.cs" />
+    <Compile Include="Class\Struct_Supplier.cs" />
     <Compile Include="Class\Struct_TipoDocumento.cs" />
     <Compile Include="Class\Struct_CategoriaAFIP.cs" />
     <Compile Include="Class\Struct_Provincia.cs" />
+    <Compile Include="Class\Struct_Unidades.cs" />
+    <Compile Include="Connection\D_Articles.cs" />
+    <Compile Include="Connection\D_Supplier.cs" />
     <Compile Include="Connection\D_TipoDocumento.cs" />
     <Compile Include="Connection\D_CategoriaAFIP.cs" />
     <Compile Include="Connection\D_Provincia.cs" />
+    <Compile Include="Connection\D_Unidades.cs" />
+    <Compile Include="GestionDataSet.cs">
+      <DependentUpon>GestionDataSet.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="GestionDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -56,10 +77,19 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Statics\ConstAlert.cs" />
+    <Compile Include="Statics\Conversion.cs" />
+    <Compile Include="Statics\Log.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <None Include="app.config" />
+    <Content Include="..\..\..\..\Portals\0\portal.css">
+      <Link>portal.css</Link>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="GestionDataSet.xsc">
       <DependentUpon>GestionDataSet.xsd</DependentUpon>
     </None>

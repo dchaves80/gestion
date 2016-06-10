@@ -1,0 +1,5 @@
+C:\DNN\DesktopModules\Atrox\bin\Products.dll
+C:\DNN\DesktopModules\Atrox\bin\Products.pdb
+C:\DNN\DesktopModules\Atrox\Products\Products\obj\Release\Products.csprojResolveAssemblyReference.cache
+C:\DNN\DesktopModules\Atrox\Products\Products\obj\Release\Products.dll
+C:\DNN\DesktopModules\Atrox\Products\Products\obj\Release\Products.pdb

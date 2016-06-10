@@ -1,0 +1,5 @@
+C:\DNN\bin\Factura2.dll
+C:\DNN\bin\Factura2.pdb
+C:\DNN\DesktopModules\Atrox\Factura2\Factura2\obj\Debug\Factura2.csprojResolveAssemblyReference.cache
+C:\DNN\DesktopModules\Atrox\Factura2\Factura2\obj\Debug\Factura2.dll
+C:\DNN\DesktopModules\Atrox\Factura2\Factura2\obj\Debug\Factura2.pdb

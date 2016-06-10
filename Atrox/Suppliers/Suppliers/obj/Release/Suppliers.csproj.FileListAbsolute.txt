@@ -1,5 +1,7 @@
 C:\DNN\DesktopModules\Atrox\bin\Suppliers.dll
 C:\DNN\DesktopModules\Atrox\bin\Suppliers.pdb
+C:\DNN\bin\Suppliers.dll
+C:\DNN\bin\Suppliers.pdb
 C:\DNN\DesktopModules\Atrox\Suppliers\Suppliers\obj\Release\Suppliers.csprojResolveAssemblyReference.cache
 C:\DNN\DesktopModules\Atrox\Suppliers\Suppliers\obj\Release\Suppliers.dll
 C:\DNN\DesktopModules\Atrox\Suppliers\Suppliers\obj\Release\Suppliers.pdb

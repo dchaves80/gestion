@@ -1,87 +1,81 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="View.ascx.cs" Inherits="Christoc.Modules.Stock.View" %>
-<style>
-    @font-face {
-	 font-family: MetroAtrox;
-    src: url('http://dnndev.me/Portals/0/Fonts/MetrostyleExtended.ttf');
-}
-.AtroxLabel {
-	font-family:Metrostyle Extended;
-    background-color: #00B4FF;
-    color:#444444;
-    padding-top:10px;
-    padding-bottom:10px;
-    margin-top:5px;
-    text-align:center;
-    vertical-align:central;
-}
-
-    .AtroxLabel:hover {
-    background-color: #006bff;
-    color:#eaeaea;
-    }
-
-    .AtroxTitle {
-	font-family:Metrostyle Extended;
-    
-    color:#444444;
-    padding-top:10px;
-    padding-bottom:10px;
-    margin-top:5px;
-    margin-bottom:10px;
-    text-align:left;
-    font-size:30px;
-}
-
-    .AtroxUserName {
-        font-size:10px;
-        
-    }
-    .FormContainer {
-        height:0%;
-        text-align:left;
-        vertical-align:central;
-        background-color:#444444;
-    }
-    textarea {
-        color:black;
-    }
-</style>
-
-
-
-
-<div class="AtroxTitle">Articulos y Stock<div id="userName" class="AtroxUserName" runat="server">OOOOOO</div> </div>
-<div class="AtroxLabel">
-    
-    PROVEEDORES
-    
+<div>
+    <span class="FormLabel"><b>Buscar Articulo:</b></span><asp:TextBox ID="txtBuscar" ClientIDMode="static" runat="server" CssClass="AtroxTextBox"></asp:TextBox><asp:Button id ="btnBuscar" ClientIDMode="static" runat="server" CssClass="FormButton FirstElement LastElement" Text="Buscar" OnClick="btnBuscar_Click"/>
 </div>
-<div class="AtroxLabel">MANEJO DE ARTICULOS</div>
-<div class="AtroxLabel">MANEJO DE STOCK</div>
-<div class="AtroxLabel ImportCSV">IMPORTACION DE CSV
-    <div class="FormContainer">
-        Código del archivo: 
-        <textarea id="CodigoArchivo" runat="server" style="width: 100%; height: 250px;"></textarea>
-    </div>
+<div><asp:Button Text="Busqueda Avanzada" ClientIDMode="static"  id="btnBusquedaAvanzada" runat="server" OnClientClick="togglePanelDeBusqueda();return false;" CssClass="FormButton FirstElement LastElement"/></div>
 
+<div id="BusquedaAvanzada" class="SubMenu">
+    <div>
+        <span class="FormLabel"> Proveedor </span>
+        <asp:DropDownList runat="server" ID="cmbProveedores" ClientIDMode="static">
+            </asp:DropDownList>
+</div>
+    
+    <div>
+    <asp:RadioButtonList ID="RadioButtonList" runat="server" ClientIDMode="static">
+        <asp:ListItem runat="server" Text="Buscar por Codigo" id="CHKbyCode" Selected="true"></asp:ListItem>
+        <asp:ListItem runat="server" Text="Buscar por Nombre" id="CHKbyName"></asp:ListItem>
+    </asp:RadioButtonList>
+        </div>
+    <asp:CheckBox Text=" Conservar los Parametros de busqueda" runat="server" ClientIDMode="static" ID="chkParameters" OnCheckedChanged="chkParameters_CheckedChanged" AutoPostBack="true"/>
+</div>
+<div id="ListadoArticulos" runat="server">
+  
+</div>
+<div id="DivMessage" runat="server">
+    
 </div>
 
 <script>
+    var PanelBusquedaAvanzada = $("#BusquedaAvanzada");
 
-    var div = $(".ImportCSVControl");
-    div.toggle(1);
-    $(".ImportCSV").click(
+    PanelBusquedaAvanzada.hide();
+    function togglePanelDeBusqueda()
+    {
+        PanelBusquedaAvanzada.toggle(1000);
+    }
 
-        function () {
-          
-            var div = $(".ImportCSVControl");
-           
-            div.toggle(1000);
-        }
-        );
 
-    $(".FormContainer").click(function (event) {
-        event.stopPropagation();
-    });
+    $(".OKStatus").hide();
+    $(".ErrorStatus").hide();
+
+
+    function SetearCantidad(p1, p2,controlSubfix)
+    {
+        var TextBoxName = "#TB" + controlSubfix;
+        var OkMessage = "#Ok" + controlSubfix;
+        var ErrorMessage = "#Error" + controlSubfix;
+        var Cell = "#CantCell" + controlSubfix;
+        var cantidad = $(TextBoxName).val();
+        var result;
+        var p_UID = "UID=" + p1;
+        var p_PID = "PID=" + p2;
+        var p_cant = "cant=" + cantidad;
+        var request = $.ajax({
+            url: "../DesktopModules/Stock/API/ModuleTask/UpdateStock",
+            method: "GET",
+            data: { UID: p1,PID:p2,cant:cantidad },
+            dataType: "html",
+            cache:false
+        });
+        
+        request.done(function (msg) {
+
+            if (msg == "ok") {
+                $(Cell).text(cantidad);
+                $(OkMessage).show(1000);
+                setTimeout(function () { $(OkMessage).hide(1000); }, 10000);
+            } else
+            {
+                $(ErrorMessage).show(1000);
+                setTimeout(function () { $(ErrorMessage).hide(1000); }, 10000);
+            }
+        });
+
+        request.fail(function (jqXHR, textStatus) {
+            $(ErrorMessage).show(1000);
+            setTimeout(function () { $(ErrorMessage).hide(1000); }, 10000);
+        });
+    }
 
 </script>

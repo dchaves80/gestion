@@ -3,12 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stock", "Stock\Stock.csproj", "{7D61A32C-0F21-453F-A981-BD8E5A3A5304}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{B74AF8A7-DD49-427A-95C4-FD415641095B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{B4B33442-03DA-474C-B4CD-D9483D69554A}"
 	ProjectSection(SolutionItems) = preProject
 		Build.proj = Build.proj
 		.build\MSBuild.Community.Tasks.dll = .build\MSBuild.Community.Tasks.dll
 		.build\MSBuild.Community.Tasks.targets = .build\MSBuild.Community.Tasks.targets
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data2", "..\Suppliers\Data\Data2.csproj", "{0AD7EE77-6B61-4606-9779-8F9E1BF1C490}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +22,10 @@ Global
 		{7D61A32C-0F21-453F-A981-BD8E5A3A5304}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D61A32C-0F21-453F-A981-BD8E5A3A5304}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D61A32C-0F21-453F-A981-BD8E5A3A5304}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AD7EE77-6B61-4606-9779-8F9E1BF1C490}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AD7EE77-6B61-4606-9779-8F9E1BF1C490}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AD7EE77-6B61-4606-9779-8F9E1BF1C490}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AD7EE77-6B61-4606-9779-8F9E1BF1C490}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
