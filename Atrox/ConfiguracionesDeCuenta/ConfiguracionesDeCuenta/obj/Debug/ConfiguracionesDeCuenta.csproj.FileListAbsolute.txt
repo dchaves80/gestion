@@ -1,0 +1,5 @@
+C:\DNN\bin\ConfiguracionesDeCuenta.dll
+C:\DNN\bin\ConfiguracionesDeCuenta.pdb
+C:\DNN\DesktopModules\Atrox\ConfiguracionesDeCuenta\ConfiguracionesDeCuenta\obj\Debug\ConfiguracionesDeCuenta.csprojResolveAssemblyReference.cache
+C:\DNN\DesktopModules\Atrox\ConfiguracionesDeCuenta\ConfiguracionesDeCuenta\obj\Debug\ConfiguracionesDeCuenta.dll
+C:\DNN\DesktopModules\Atrox\ConfiguracionesDeCuenta\ConfiguracionesDeCuenta\obj\Debug\ConfiguracionesDeCuenta.pdb
