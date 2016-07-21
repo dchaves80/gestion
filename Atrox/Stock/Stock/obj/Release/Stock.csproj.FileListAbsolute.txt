@@ -3,3 +3,5 @@ C:\DNN\DesktopModules\Atrox\bin\Stock.pdb
 C:\DNN\DesktopModules\Atrox\Stock\Stock\obj\Release\Stock.csprojResolveAssemblyReference.cache
 C:\DNN\DesktopModules\Atrox\Stock\Stock\obj\Release\Stock.dll
 C:\DNN\DesktopModules\Atrox\Stock\Stock\obj\Release\Stock.pdb
+C:\DNN\bin\Stock.dll
+C:\DNN\bin\Stock.pdb

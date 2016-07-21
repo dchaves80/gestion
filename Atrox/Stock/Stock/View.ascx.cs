@@ -223,7 +223,12 @@ namespace Christoc.Modules.Stock
                         _TDDescripcion.InnerText = p_PDS.Listado[a].Descripcion;
                         _TDProveedor.InnerText = p_PDS.MyDATATABLE.Rows[a]["NombreProveedor"].ToString();
 
-                        if (p_PDS.Listado[a].CantidadINT != 0)
+                    
+                    
+                    Data2.Class.Struct_Unidades U = new Data2.Class.Struct_Unidades(p_PDS.Listado[a].IdUnidad);
+                    
+
+                        if (U.Decimal==false)
                         {
                             _TDCantidad.InnerText = p_PDS.Listado[a].CantidadINT.ToString();
                         }
