@@ -284,7 +284,7 @@ namespace Data2.Class
         {
             GestionDataSetTableAdapters.QueriesTableAdapter QTA = new GestionDataSetTableAdapters.QueriesTableAdapter();
             
-            Struct_Unidades UNIT = new Struct_Unidades( IdUnidad);
+            Struct_Unidades UNIT = new Struct_Unidades(IdUnidad);
             int cantcambios = 0;
             if (UNIT.Decimal == true)
             {

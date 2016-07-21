@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -56,7 +57,11 @@
     <Compile Include="Class\Struct_CategoriaAFIP.cs" />
     <Compile Include="Class\Struct_Provincia.cs" />
     <Compile Include="Class\Struct_Unidades.cs" />
+    <Compile Include="Class\XmlSerializaers\Detalle.cs" />
+    <Compile Include="Class\XmlSerializaers\Factura.cs" />
     <Compile Include="Connection\D_Articles.cs" />
+    <Compile Include="Connection\D_Factura.cs" />
+    <Compile Include="Connection\D_StaticWebService.cs" />
     <Compile Include="Connection\D_Supplier.cs" />
     <Compile Include="Connection\D_TipoDocumento.cs" />
     <Compile Include="Connection\D_CategoriaAFIP.cs" />

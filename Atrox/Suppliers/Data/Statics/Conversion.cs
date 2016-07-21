@@ -19,7 +19,16 @@ namespace Data2.Statics
 
             string mydecimalconverted = mydecimal.Replace(',', myDecimalChar);
             mydecimalconverted = mydecimalconverted.Replace('.', myDecimalChar);
-            return Convert.ToDecimal(mydecimalconverted);
+
+            try
+            {
+
+                return Convert.ToDecimal(mydecimalconverted);
+            }
+            catch 
+            {
+                return 0m;
+            }
 
 
         }
