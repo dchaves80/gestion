@@ -60,100 +60,110 @@ namespace Christoc.Modules.Facturacion
         {
             if (Session[GrillaBusquedaSession]!=null) 
             {
+                
                 Data2.Class.Struct_Producto.ProductDATASET PDS = Session[GrillaBusquedaSession] as Data2.Class.Struct_Producto.ProductDATASET;
-                tableBody.Controls.Clear();
 
-                
-                
-                HtmlGenericControl _table = new HtmlGenericControl("table");
-                _table.Attributes.Add("cellspacing", "0");
-                _table.Attributes.Add("border", "1");
-                _table.Attributes.Add("style", "border-collapse:collapse;width:100%");
-                HtmlGenericControl _tbody = new HtmlGenericControl("tbody");
-
-                HtmlGenericControl _trHeader = new HtmlGenericControl("tr");
-                _trHeader.Attributes.Add("class", "AtroxHeaderGrid");
-
-                string[] tableHeaders = {"0"};
-
-                if (modulofacturacion == true)
+                if (PDS.Listado.Count > 0)
                 {
-                    string[] H = { "Codigo", "Descripcion", "Stock", "Precio de Venta", "Agregar" };
-                    tableHeaders = H;
-                }
-                else 
-                {
-                    string[] H = { "Codigo", "Descripcion", "Stock", "Precio de Venta"};
-                    tableHeaders = H;
-                }
-                
-                for (int a = 0; a < tableHeaders.Length; a++) 
-                {
-                    HtmlGenericControl _th = new HtmlGenericControl("th");
-                    _th.InnerText = tableHeaders[a];
-                    _trHeader.Controls.Add(_th);
-                }
+                    HF_results.Value = "1";
+                    tableBody.Controls.Clear();
 
-                _tbody.Controls.Add(_trHeader);
-                _table.Controls.Add(_tbody);
-                tableBody.Controls.Add(_table);
 
-                for (int a = 0; a < PDS.Listado.Count; a++) 
-                {
-                    HtmlGenericControl _Tr = new HtmlGenericControl("tr");
-                    _Tr.Attributes.Add("class", "AtroxRowTable");
-                    
-                    HtmlGenericControl Cell_Codigo = new HtmlGenericControl("td");
-                    Cell_Codigo.InnerText = PDS.Listado[a].CodigoInterno;
 
-                    HtmlGenericControl Cell_Descripcion = new HtmlGenericControl("td");
-                    Cell_Descripcion.InnerText = PDS.Listado[a].Descripcion;
+                    HtmlGenericControl _table = new HtmlGenericControl("table");
+                    _table.Attributes.Add("cellspacing", "0");
+                    _table.Attributes.Add("border", "1");
+                    _table.Attributes.Add("style", "border-collapse:collapse;width:100%");
+                    HtmlGenericControl _tbody = new HtmlGenericControl("tbody");
 
-                    HtmlGenericControl Cell_Stock = new HtmlGenericControl("td");
+                    HtmlGenericControl _trHeader = new HtmlGenericControl("tr");
+                    _trHeader.Attributes.Add("class", "AtroxHeaderGrid");
 
-                    Data2.Class.Struct_Unidades U = new Data2.Class.Struct_Unidades(PDS.Listado[a].IdUnidad);
-                    if (U.Decimal == true)
-                    {
-                        Cell_Stock.InnerText = PDS.Listado[a].CantidadDEC.ToString() + " " + U.Simbolo;
-                    }
-                    else 
-                    {
-                        Cell_Stock.InnerText = PDS.Listado[a].CantidadINT.ToString() + " " + U.Simbolo;
-                    }
-
-                    HtmlGenericControl Cell_PV = new HtmlGenericControl("td");
-                    Cell_PV.InnerText = "$ " + PDS.Listado[a].PrecioFinal.ToString();
-
-                    HtmlGenericControl Cell_Agregar = new HtmlGenericControl("td");
-                    Cell_Agregar.Attributes.Add("class", "AtroxDarkLink");
-                    HtmlGenericControl Agregar_Link = new HtmlGenericControl("a");
-                    Agregar_Link.Attributes.Add("href", MyURL + "?Add=" + PDS.Listado[a].Id.ToString());
-                    Agregar_Link.InnerText = "Agregar a factura";
-                    Cell_Agregar.Controls.Add(Agregar_Link);
-
-                    
-
-                    _Tr.Controls.Add(Cell_Codigo);
-                    _Tr.Controls.Add(Cell_Descripcion);
-                    _Tr.Controls.Add(Cell_Stock);
-                    _Tr.Controls.Add(Cell_PV);
+                    string[] tableHeaders = { "0" };
 
                     if (modulofacturacion == true)
                     {
-                        _Tr.Controls.Add(Cell_Agregar);
+                        string[] H = { "Codigo", "Descripcion", "Stock", "Precio de Venta", "Agregar" };
+                        tableHeaders = H;
                     }
-                    
-                    _tbody.Controls.Add(_Tr);
+                    else
+                    {
+                        string[] H = { "Codigo", "Descripcion", "Stock", "Precio de Venta" };
+                        tableHeaders = H;
+                    }
+
+                    for (int a = 0; a < tableHeaders.Length; a++)
+                    {
+                        HtmlGenericControl _th = new HtmlGenericControl("th");
+                        _th.InnerText = tableHeaders[a];
+                        _trHeader.Controls.Add(_th);
+                    }
+
+                    _tbody.Controls.Add(_trHeader);
+                    _table.Controls.Add(_tbody);
+                    tableBody.Controls.Add(_table);
+
+                    for (int a = 0; a < PDS.Listado.Count; a++)
+                    {
+                        HtmlGenericControl _Tr = new HtmlGenericControl("tr");
+                        _Tr.Attributes.Add("class", "AtroxRowTable");
+
+                        HtmlGenericControl Cell_Codigo = new HtmlGenericControl("td");
+                        Cell_Codigo.InnerText = PDS.Listado[a].CodigoInterno;
+
+                        HtmlGenericControl Cell_Descripcion = new HtmlGenericControl("td");
+                        Cell_Descripcion.InnerText = PDS.Listado[a].Descripcion;
+
+                        HtmlGenericControl Cell_Stock = new HtmlGenericControl("td");
+
+                        Data2.Class.Struct_Unidades U = new Data2.Class.Struct_Unidades(PDS.Listado[a].IdUnidad);
+                        if (U.Decimal == true)
+                        {
+                            Cell_Stock.InnerText = PDS.Listado[a].CantidadDEC.ToString() + " " + U.Simbolo;
+                        }
+                        else
+                        {
+                            Cell_Stock.InnerText = PDS.Listado[a].CantidadINT.ToString() + " " + U.Simbolo;
+                        }
+
+                        HtmlGenericControl Cell_PV = new HtmlGenericControl("td");
+                        Cell_PV.InnerText = "$ " + PDS.Listado[a].PrecioFinal.ToString();
+
+                        HtmlGenericControl Cell_Agregar = new HtmlGenericControl("td");
+                        Cell_Agregar.Attributes.Add("class", "AtroxDarkLink");
+                        HtmlGenericControl Agregar_Link = new HtmlGenericControl("a");
+                        Agregar_Link.Attributes.Add("href", MyURL + "?Add=" + PDS.Listado[a].Id.ToString());
+                        Agregar_Link.InnerText = "Agregar a factura";
+                        Cell_Agregar.Controls.Add(Agregar_Link);
 
 
+
+                        _Tr.Controls.Add(Cell_Codigo);
+                        _Tr.Controls.Add(Cell_Descripcion);
+                        _Tr.Controls.Add(Cell_Stock);
+                        _Tr.Controls.Add(Cell_PV);
+
+                        if (modulofacturacion == true)
+                        {
+                            _Tr.Controls.Add(Cell_Agregar);
+                        }
+
+                        _tbody.Controls.Add(_Tr);
+
+
+                    }
                 }
-
+                else 
+                {
+                    HF_results.Value = "0";
+                }
 
             }
         }
 
         private void ConfigurarModulo() 
         {
+            tableBody.ClientIDMode = System.Web.UI.ClientIDMode.Static;
             DotNetNuke.Entities.Tabs.TabController TC = new DotNetNuke.Entities.Tabs.TabController();
             DotNetNuke.Entities.Tabs.TabInfo TI = TC.GetTab(TabId, PortalId);
             MyURL = TI.FullUrl;
@@ -212,6 +222,7 @@ namespace Christoc.Modules.Facturacion
         protected void btnCrearFactura_Click(object sender, EventArgs e)
         {
             Session.Add(FacturaSesssionKEY, new Data2.Class.Struct_Factura(UserId));
+            
             redirecttome(null);
 
         }

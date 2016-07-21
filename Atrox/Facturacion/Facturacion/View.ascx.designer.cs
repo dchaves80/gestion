@@ -76,6 +76,24 @@ namespace Christoc.Modules.Facturacion {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl tableBody;
         
         /// <summary>
+        /// HF_results control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HF_results;
+        
+        /// <summary>
+        /// btnShowResults control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnShowResults;
+        
+        /// <summary>
         /// debugDIV control.
         /// </summary>
         /// <remarks>
