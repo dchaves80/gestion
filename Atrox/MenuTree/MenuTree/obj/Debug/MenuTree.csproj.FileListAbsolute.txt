@@ -1,0 +1,5 @@
+C:\DNN\DesktopModules\Atrox\bin\MenuTree.dll
+C:\DNN\DesktopModules\Atrox\bin\MenuTree.pdb
+C:\DNN\DesktopModules\Atrox\MenuTree\MenuTree\obj\Debug\MenuTree.csprojResolveAssemblyReference.cache
+C:\DNN\DesktopModules\Atrox\MenuTree\MenuTree\obj\Debug\MenuTree.dll
+C:\DNN\DesktopModules\Atrox\MenuTree\MenuTree\obj\Debug\MenuTree.pdb
