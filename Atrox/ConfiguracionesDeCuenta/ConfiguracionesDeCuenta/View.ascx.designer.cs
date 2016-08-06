@@ -40,6 +40,15 @@ namespace Christoc.Modules.ConfiguracionesDeCuenta {
         protected global::System.Web.UI.WebControls.TextBox txtBaudios;
         
         /// <summary>
+        /// btnGuardar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGuardar;
+        
+        /// <summary>
         /// btnX control.
         /// </summary>
         /// <remarks>
@@ -58,6 +67,15 @@ namespace Christoc.Modules.ConfiguracionesDeCuenta {
         protected global::System.Web.UI.WebControls.Button btnZ;
         
         /// <summary>
+        /// btnAvanzarPapel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAvanzarPapel;
+        
+        /// <summary>
         /// btnPrintText control.
         /// </summary>
         /// <remarks>
@@ -74,5 +92,140 @@ namespace Christoc.Modules.ConfiguracionesDeCuenta {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtTextoPrueba;
+        
+        /// <summary>
+        /// MensajeConfigUsuario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MensajeConfigUsuario;
+        
+        /// <summary>
+        /// txt_NombreNegocio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_NombreNegocio;
+        
+        /// <summary>
+        /// cmb_FacturaPorDefecto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cmb_FacturaPorDefecto;
+        
+        /// <summary>
+        /// uploadfile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload uploadfile;
+        
+        /// <summary>
+        /// btn_SubirLogo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_SubirLogo;
+        
+        /// <summary>
+        /// img_logo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image img_logo;
+        
+        /// <summary>
+        /// chk_MostrarLogoNegocio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chk_MostrarLogoNegocio;
+        
+        /// <summary>
+        /// btnGuardarConfigNegocio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGuardarConfigNegocio;
+        
+        /// <summary>
+        /// txt_NombreVendedor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_NombreVendedor;
+        
+        /// <summary>
+        /// txt_PorcentajeVendedor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_PorcentajeVendedor;
+        
+        /// <summary>
+        /// btn_AgregarVendedor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_AgregarVendedor;
+        
+        /// <summary>
+        /// cmb_ListadoVendedores control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cmb_ListadoVendedores;
+        
+        /// <summary>
+        /// btn_EditarVendedor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_EditarVendedor;
+        
+        /// <summary>
+        /// btn_BorrarVendedor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_BorrarVendedor;
+        
+        /// <summary>
+        /// KEY control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField KEY;
     }
 }

@@ -24,5 +24,9 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=managerdenegocios.com;Initial Catalog=GestionSystem;User ID=UserGestion;Password=Sealab2021!</Value>
     </Setting>
+    <Setting Name="Setting" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">asd
+</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

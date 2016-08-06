@@ -23,7 +23,7 @@ namespace Data2.Connection
                     p_F.GetDetalle()[a].PRODUCTO.PorcentajeGanancia, 
                     p_F.GetDetalle()[a].PRODUCTO.PrecioFinal, 
                     p_F.GetDetalle()[a].DETALLEINT, 
-                    p_F.GetDetalle()[a].PRODUCTO.CantidadDEC);
+                    p_F.GetDetalle()[a].DETALLEDEC);
             }
         }
 

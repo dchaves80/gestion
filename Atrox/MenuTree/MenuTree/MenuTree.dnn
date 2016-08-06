@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="MenuTree" type="Module" version="00.00.01">
+    <package name="MenuTree" type="Module" version="01.00.01">
       <friendlyName>MenuTree</friendlyName>
       <description>Christoc.com MenuTree module</description>
       <iconFile>Images/icon_extensions.gif</iconFile>

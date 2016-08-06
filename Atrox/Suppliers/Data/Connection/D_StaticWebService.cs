@@ -84,6 +84,28 @@ namespace Data2.Connection
             } else { return "null"; }
         }
 
+        public string GetPrivateKeyByIdUser(int IdUser)
+        {
+            GestionDataSet.GetKeyUserDataTable DT = new GestionDataSet.GetKeyUserDataTable();
+            GestionDataSetTableAdapters.GetKeyUserTableAdapter TA = new GestionDataSetTableAdapters.GetKeyUserTableAdapter();
+            TA.Fill(DT, IdUser);
+            if (DT.Rows.Count != 0)
+            {
+                try
+                {
+                    return DT[0][1].ToString();
+                }
+                catch
+                {
+                    return "null";
+                }
+            }
+            else
+            {
+                return "null";
+            }
+        }
+
         public int GetUserByPrivateKey(string PrivateKey) 
         {
             GestionDataSet.GetIdUserDataTable DT = new GestionDataSet.GetIdUserDataTable();

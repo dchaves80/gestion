@@ -129,7 +129,9 @@
     <Content Include="View.ascx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Factura2.dnn" />
+    <Content Include="Factura2.dnn">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="BuildScripts\ModulePackage.targets" />

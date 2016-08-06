@@ -51,22 +51,27 @@
   <ItemGroup>
     <Compile Include="Class\Struct_DetalleFactura.cs" />
     <Compile Include="Class\Struct_Factura.cs" />
+    <Compile Include="Class\Struct_PrintConfiguration.cs" />
     <Compile Include="Class\Struct_Producto.cs" />
     <Compile Include="Class\Struct_Supplier.cs" />
     <Compile Include="Class\Struct_TipoDocumento.cs" />
     <Compile Include="Class\Struct_CategoriaAFIP.cs" />
     <Compile Include="Class\Struct_Provincia.cs" />
     <Compile Include="Class\Struct_Unidades.cs" />
+    <Compile Include="Class\Struct_UserConfig.cs" />
     <Compile Include="Class\XmlSerializaers\Detalle.cs" />
     <Compile Include="Class\XmlSerializaers\Factura.cs" />
+    <Compile Include="Class\XmlSerializaers\PrinterAction.cs" />
     <Compile Include="Connection\D_Articles.cs" />
     <Compile Include="Connection\D_Factura.cs" />
+    <Compile Include="Connection\D_PrinterConfig.cs" />
     <Compile Include="Connection\D_StaticWebService.cs" />
     <Compile Include="Connection\D_Supplier.cs" />
     <Compile Include="Connection\D_TipoDocumento.cs" />
     <Compile Include="Connection\D_CategoriaAFIP.cs" />
     <Compile Include="Connection\D_Provincia.cs" />
     <Compile Include="Connection\D_Unidades.cs" />
+    <Compile Include="Connection\D_UserConfig.cs" />
     <Compile Include="GestionDataSet.cs">
       <DependentUpon>GestionDataSet.xsd</DependentUpon>
       <SubType>Component</SubType>
@@ -82,6 +87,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="PublicsEnum\Enum_Printer.cs" />
     <Compile Include="Statics\ConstAlert.cs" />
     <Compile Include="Statics\Conversion.cs" />
     <Compile Include="Statics\Log.cs" />

@@ -11,6 +11,7 @@
 */
 
 using System;
+using System.Collections.Generic;
 using DotNetNuke.Security;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Entities.Modules;
@@ -103,6 +104,7 @@ namespace Christoc.Modules.Stock
 
             CargarProveedores();
 
+            KEY.Value = new Data2.Connection.D_StaticWebService().GetPrivateKeyByIdUser(UserId).ToString();
 
             if (!IsPostBack) 
             {
@@ -198,6 +200,11 @@ namespace Christoc.Modules.Stock
 
             if (p_PDS != null)
             {
+
+                List<Data2.Class.Struct_Unidades> UnitsList = Data2.Class.Struct_Unidades.GetAll();
+
+
+
                 
                 for (int a = 0; a < p_PDS.Listado.Count; a++)
                 {
@@ -261,8 +268,33 @@ namespace Christoc.Modules.Stock
                     TextBOX.Attributes.Add("ID", "TB" + a.ToString());
                     TextBOX.Attributes.Add("Class", "AtroxTextBoxMount");
                     _TDEditarBorrar.Controls.Add(TextBOX);
+
+                    if (UnitsList != null && UnitsList.Count > 0)
+                    {
+                        HtmlGenericControl ListBox = new HtmlGenericControl("select");
+                        ListBox.Attributes.Add("ID", "SL" + a.ToString());
+                        for (int b = 0; b < UnitsList.Count; b++) 
+                        {
+                            HtmlGenericControl OPT = new HtmlGenericControl("option");
+                            OPT.Attributes.Add("value", UnitsList[b].Id.ToString());
+                            
+                            
+
+                            OPT.InnerText = UnitsList[b].Nombre;
+                            if (p_PDS.Listado[a].IdUnidad == UnitsList[b].Id) 
+                            {
+                                OPT.Attributes.Add("selected", "");
+                            }
+                            ListBox.Controls.Add(OPT);
+                        }
+
+
+
+                        _TDEditarBorrar.Controls.Add(ListBox);
+                    }
                     
-                    
+
+
                     HtmlGenericControl BUTTON = new HtmlGenericControl("input");
                     BUTTON.Attributes.Add("type", "Button");
                     BUTTON.Attributes.Add("value", "Setear");

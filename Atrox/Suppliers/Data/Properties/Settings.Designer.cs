@@ -55,5 +55,14 @@ namespace Data2.Properties {
                 return ((string)(this["GestionConnectionStringREMOTE"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("asd\r\n")]
+        public string Setting {
+            get {
+                return ((string)(this["Setting"]));
+            }
+        }
     }
 }

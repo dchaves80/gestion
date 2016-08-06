@@ -18,7 +18,7 @@ namespace Christoc.Modules.Stock
             [AllowAnonymous]
             [HttpGet]
             
-            public HttpResponseMessage UpdateStock(int UID,int PID,string cant) 
+            public HttpResponseMessage UpdateStock(int UID,int PID,string cant, int unit, string key) 
             {
 
                 
@@ -29,6 +29,17 @@ namespace Christoc.Modules.Stock
                 {
 
                     Data2.Class.Struct_Unidades U = new Data2.Class.Struct_Unidades(PD.IdUnidad);
+
+                    if (PD.IdUnidad != unit) 
+                    {
+                        Data2.Connection.D_StaticWebService SWS = new Data2.Connection.D_StaticWebService();
+                        int IdUser = SWS.GetUserByPrivateKey(key);
+                        if (IdUser != 0)
+                        {
+                            PD.IdUnidad = unit;
+                            PD.Actualizar(IdUser);
+                        }
+                    }
 
 
 

@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="Suppliers" type="Module" version="02.00.00">
+    <package name="Suppliers" type="Module" version="03.00.00">
       <friendlyName>Suppliers</friendlyName>
       <description>Christoc.com Suppliers module</description>
       <iconFile>Images/icon_extensions.gif</iconFile>

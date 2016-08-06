@@ -8,6 +8,19 @@ namespace Data2.Statics
 {
     public static class Conversion
     {
+        public static bool convertSQLToBoolean(object p_MySQLBOOLEAN)
+        {
+            string result = p_MySQLBOOLEAN.ToString().ToLower();
+            switch (result)
+            {
+                case "1":
+                case "true": { return true; }
+                case "0":
+                case "false": { return false; }
+                default: return false;
+            }
+        }
+
         public static Decimal GetDecimal(string mydecimal) 
         {
 

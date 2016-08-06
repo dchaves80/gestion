@@ -28,6 +28,7 @@ namespace Data2.Connection
        public static DataTable Get_AllShort(int p_IdUser)
        {
            
+           
 
            GestionDataSet.select_allSuppliersDataTable DT = new GestionDataSet.select_allSuppliersDataTable();
            GestionDataSetTableAdapters.select_allSuppliersTableAdapter TA = new GestionDataSetTableAdapters.select_allSuppliersTableAdapter();

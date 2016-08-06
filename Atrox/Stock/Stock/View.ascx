@@ -25,7 +25,7 @@
 <div id="DivMessage" runat="server">
     
 </div>
-
+<asp:HiddenField id="KEY" runat="server" ClientIDMode="Static" Value="" ></asp:HiddenField>
 <script>
     var PanelBusquedaAvanzada = $("#BusquedaAvanzada");
 
@@ -42,11 +42,14 @@
 
     function SetearCantidad(p1, p2,controlSubfix)
     {
+        var KEYVALUE = $("#KEY").val();
         var TextBoxName = "#TB" + controlSubfix;
+        var SelectName = "#SL" + controlSubfix;
         var OkMessage = "#Ok" + controlSubfix;
         var ErrorMessage = "#Error" + controlSubfix;
         var Cell = "#CantCell" + controlSubfix;
         var cantidad = $(TextBoxName).val();
+        var unidad = $(SelectName + " option:selected").val();
         var result;
         var p_UID = "UID=" + p1;
         var p_PID = "PID=" + p2;
@@ -54,7 +57,7 @@
         var request = $.ajax({
             url: "../DesktopModules/Stock/API/ModuleTask/UpdateStock",
             method: "GET",
-            data: { UID: p1,PID:p2,cant:cantidad },
+            data: { UID: p1,PID:p2,cant:cantidad,unit:unidad,key:KEYVALUE},
             dataType: "html",
             cache:false
         });
