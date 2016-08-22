@@ -3,11 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
 
 namespace Data2.Connection
 {
     public class D_Factura
     {
+
+        public DataTable GetFacturasBetweenDates(int Iduser, DateTime Start, DateTime End,String TIPO, bool Printed) 
+        {
+            
+            GestionDataSetTableAdapters.SELECT_FACTURASBetweenDatesTableAdapter TA = new GestionDataSetTableAdapters.SELECT_FACTURASBetweenDatesTableAdapter();
+            GestionDataSet.SELECT_FACTURASBetweenDatesDataTable DT = new GestionDataSet.SELECT_FACTURASBetweenDatesDataTable();
+            
+            TA.Fill(DT, Iduser, Statics.Conversion.DateTimeToSql(Start), Statics.Conversion.DateTimeToSql(End), TIPO, Printed);
+            if (DT.Rows.Count > 0)
+            {
+                return DT;
+            }
+            else 
+            {
+                return null;
+            }
+        }
 
         public void InsertarDetalleFactura(Class.Struct_Factura p_F) 
         {
@@ -24,6 +42,35 @@ namespace Data2.Connection
                     p_F.GetDetalle()[a].PRODUCTO.PrecioFinal, 
                     p_F.GetDetalle()[a].DETALLEINT, 
                     p_F.GetDetalle()[a].DETALLEDEC);
+            }
+        }
+
+        public DataRow GetFacturaById(int p_iduser, int p_idfactura) 
+        {
+            GestionDataSet.GetFacturaFromIdDataTable DT = new GestionDataSet.GetFacturaFromIdDataTable();
+            GestionDataSetTableAdapters.GetFacturaFromIdTableAdapter TA = new GestionDataSetTableAdapters.GetFacturaFromIdTableAdapter();
+            TA.Fill(DT, p_iduser, p_idfactura);
+            if (DT.Rows.Count > 0)
+            {
+                return DT.Rows[0];
+            }
+            else 
+            {
+                return null;
+            }
+        }
+
+        public bool InsertVendedorEnFactura(int IdUser, int IdVendedor, int IdFactura) 
+        {
+            GestionDataSetTableAdapters.QueriesTableAdapter QTA = new GestionDataSetTableAdapters.QueriesTableAdapter();
+            int _change = QTA.Insert_FacturaEnVendedor(IdUser, IdVendedor, IdFactura);
+            if (_change != 0)
+            {
+                return true;
+            }
+            else 
+            {
+                return false;
             }
         }
 
@@ -55,6 +102,7 @@ namespace Data2.Connection
             decimal p_SubTotal,
             bool p_Ivas,
             decimal p_Total
+            
             
             ) 
         {

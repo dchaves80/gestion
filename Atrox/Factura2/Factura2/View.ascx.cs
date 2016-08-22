@@ -146,6 +146,21 @@ namespace Christoc.Modules.Factura2
             Log.ADD("Configuracion Modulo", this);
             hf_URL.Value = MyURL;
 
+            if (cmb_Vendedor.Items.Count == 0) 
+            {
+                System.Web.UI.WebControls.ListItem LI = new System.Web.UI.WebControls.ListItem("Ninguno", "0");
+                cmb_Vendedor.Items.Add(LI);
+                List<Struct_Vendedores> LV = Data2.Class.Struct_Vendedores.GetAllVendedores(UserId);
+                if (LV != null) 
+                {
+                    foreach (Struct_Vendedores V in LV) 
+                    {
+                        System.Web.UI.WebControls.ListItem _LI = new System.Web.UI.WebControls.ListItem(V.NombreVendedor, V.Id.ToString());
+                        cmb_Vendedor.Items.Add(_LI);
+                    }
+                }
+            }
+
         }
 
         void ConfigurarControlesTipoFactura(Struct_Factura p_f) 
@@ -372,6 +387,7 @@ namespace Christoc.Modules.Factura2
             ConfigurarModulo();
             InterpretarRequest();
 
+
             
 
             if (Session[FacturaSesssionKEY] != null)
@@ -382,11 +398,11 @@ namespace Christoc.Modules.Factura2
                 DatosFactura.Visible = true;
                 if (_F.GetDetalle()!=null)
                 {
-                    GuardarFactura.Visible = true;
+                    div_GuardarFactura.Visible = true;
                 }
                 else 
                 {
-                    GuardarFactura.Visible = false;
+                    div_GuardarFactura.Visible = false;
                 }
             }
             else 
@@ -394,7 +410,7 @@ namespace Christoc.Modules.Factura2
                 Log.ADD("La sesion de la factura NO existe", this);
                 _F = null;
                 DatosFactura.Visible = false;
-                GuardarFactura.Visible = false;
+                div_GuardarFactura.Visible = false;
             }
 
 
@@ -581,7 +597,9 @@ namespace Christoc.Modules.Factura2
 
         protected void GuardarFactura_Click(object sender, EventArgs e)
         {
-            if (_F.GuardarFactura() == true)
+            int _Vendedor = int.Parse(cmb_Vendedor.SelectedValue);
+
+            if (_F.GuardarFactura(_Vendedor) == true)
             {
                 Session.Remove(FacturaSesssionKEY);
                 redirecttome("");

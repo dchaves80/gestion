@@ -1,0 +1,5 @@
+C:\DNN\bin\ListadoFacturas.dll
+C:\DNN\bin\ListadoFacturas.pdb
+C:\DNN\DesktopModules\Atrox\ListadoFacturas\ListadoFacturas\obj\Debug\ListadoFacturas.csprojResolveAssemblyReference.cache
+C:\DNN\DesktopModules\Atrox\ListadoFacturas\ListadoFacturas\obj\Debug\ListadoFacturas.dll
+C:\DNN\DesktopModules\Atrox\ListadoFacturas\ListadoFacturas\obj\Debug\ListadoFacturas.pdb

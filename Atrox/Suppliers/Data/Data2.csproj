@@ -59,6 +59,7 @@
     <Compile Include="Class\Struct_Provincia.cs" />
     <Compile Include="Class\Struct_Unidades.cs" />
     <Compile Include="Class\Struct_UserConfig.cs" />
+    <Compile Include="Class\Struct_Vendedores.cs" />
     <Compile Include="Class\XmlSerializaers\Detalle.cs" />
     <Compile Include="Class\XmlSerializaers\Factura.cs" />
     <Compile Include="Class\XmlSerializaers\PrinterAction.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Connection\D_Provincia.cs" />
     <Compile Include="Connection\D_Unidades.cs" />
     <Compile Include="Connection\D_UserConfig.cs" />
+    <Compile Include="Connection\D_Vendedores.cs" />
     <Compile Include="GestionDataSet.cs">
       <DependentUpon>GestionDataSet.xsd</DependentUpon>
       <SubType>Component</SubType>
@@ -96,6 +98,7 @@
     <Content Include="..\..\..\..\Portals\0\portal.css">
       <Link>portal.css</Link>
     </Content>
+    <Content Include="PostBuildScript.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">

@@ -220,6 +220,33 @@ namespace Christoc.Modules.ConfiguracionesDeCuenta {
         protected global::System.Web.UI.WebControls.Button btn_BorrarVendedor;
         
         /// <summary>
+        /// txt_EdcNombre control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_EdcNombre;
+        
+        /// <summary>
+        /// txt_EdcPorcentaje control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_EdcPorcentaje;
+        
+        /// <summary>
+        /// btnGuardarCambios control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGuardarCambios;
+        
+        /// <summary>
         /// KEY control.
         /// </summary>
         /// <remarks>
@@ -227,5 +254,23 @@ namespace Christoc.Modules.ConfiguracionesDeCuenta {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField KEY;
+        
+        /// <summary>
+        /// hostn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hostn;
+        
+        /// <summary>
+        /// idEdition control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField idEdition;
     }
 }

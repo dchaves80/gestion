@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,29 @@ namespace Data2.Class
             {
                 DETALLEINT = Convert.ToInt32(Statics.Conversion.GetDecimal(value));
             }
+        }
+
+        public Struct_DetalleFactura(DataRow p_DR, int p_IdUser) 
+        {
+            DETALLEINT = int.Parse(p_DR["CantidadINT"].ToString());
+            DETALLEDEC = Statics.Conversion.GetDecimal(p_DR["CantidadDEC"].ToString());
+            InitAccessKey();
+            DataRow _DR = Connection.D_Articles.SelectSingleArticle(p_IdUser,int.Parse(p_DR["IdArticulo"].ToString()));
+            if (_DR!=null)
+            {
+                PRODUCTO = Data2.Class.Struct_Producto.DataRowToProduct(_DR);
+
+                if (PRODUCTO != null)
+                {
+                    PRODUCTO.PrecioCompra = Statics.Conversion.GetDecimal(p_DR["PrecioCompra"].ToString());
+                    PRODUCTO.PorcentajeGanancia = Statics.Conversion.GetDecimal(p_DR["PorcentajeGanancia"].ToString());
+                    PRODUCTO.PrecioFinal = Statics.Conversion.GetDecimal(p_DR["PrecioFinal"].ToString());
+                    PRODUCTO.IVA = Statics.Conversion.GetDecimal(p_DR["IVA"].ToString());
+                    PRODUCTO.PrecioNeto = Statics.Conversion.GetDecimal(p_DR["PrecioNeto"].ToString());
+                    isdec = new Struct_Unidades(PRODUCTO.IdUnidad).Decimal;
+                }
+            }
+            
         }
 
         public Struct_DetalleFactura(int IdProd, int IdUser) 

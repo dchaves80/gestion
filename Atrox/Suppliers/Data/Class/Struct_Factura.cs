@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Data2.Statics;
 
 namespace Data2.Class
 {
@@ -12,7 +14,7 @@ namespace Data2.Class
     public class Struct_Factura
     {
 
-        public enum TipoDeFactura { FacturaA, FacturaB, FacturaC};
+        public enum TipoDeFactura { Null ,FacturaA, FacturaB, FacturaC};
         public enum CondicionIVA { RespInscripto, RespNoInscripto, Exento, ConsumidorFinal, RespMonotributo }
         public enum CondicionPago { Contado, CtaCte }
         
@@ -30,6 +32,20 @@ namespace Data2.Class
         public decimal IvaPredValor=0m;
         public bool IvaPredeterminado;
         public string Observaciones="";
+        public string serialAFIP;
+        public string serialTICKET;
+        public bool printed;
+        public bool PrintAgain;
+        public bool Transmitida;
+        public DateTime Fecha;
+        public int IdCuentaCorriente;
+        public bool cheque;
+        public string DNI;
+        public int IdTarjeta;
+        public string NumeroTarjeta;
+        public decimal subtotal;
+        public bool ivas;
+        public decimal total;
 
         public List<decimal> GetIvasInscriptos() 
         {
@@ -93,7 +109,16 @@ namespace Data2.Class
             return total;
         }
 
-        public bool GuardarFactura() 
+        private void SetVendedor(int p_IdVendedor)
+        {
+            Connection.D_Factura F = new Connection.D_Factura();
+            if (Id != 0 && p_IdVendedor != 0 && UserId != 0)
+            {
+                F.InsertVendedorEnFactura(UserId, p_IdVendedor, Id);
+            }
+        }
+
+        public bool GuardarFactura(int p_IdVendedor) 
         {
             Connection.D_Factura F = new Connection.D_Factura();
 
@@ -125,6 +150,7 @@ namespace Data2.Class
                 {
                     Id = IdFactura;
                     F.InsertarDetalleFactura(this);
+                    SetVendedor(p_IdVendedor);
                     return true;
                 }
                 else
@@ -140,6 +166,7 @@ namespace Data2.Class
                 {
                     Id = IdFactura;
                     F.InsertarDetalleFactura(this);
+                    SetVendedor(p_IdVendedor);
                     return true;
                 }
                 else
@@ -151,6 +178,7 @@ namespace Data2.Class
             {
                 return false;
             }
+           
         }
 
         public decimal GetTotalDeInsceripcionIva(decimal IvaFiltro) 
@@ -186,9 +214,6 @@ namespace Data2.Class
             return total;
         }
 
-
-      
-
         public void BorrarDetalle(string p_key)
         {
             for (int a = 0; a < MiDetalle.Count; a++) 
@@ -207,7 +232,109 @@ namespace Data2.Class
             FacturaTipo = p_tf;
         }
 
-       
+
+        public static Struct_Factura GetFacturaById(int p_userid, int p_idfactura) 
+        {
+            Connection.D_Factura _Conn = new Connection.D_Factura();
+            DataRow _DR = _Conn.GetFacturaById(p_userid, p_idfactura);
+            if (_DR != null)
+            {
+                return new Struct_Factura(_DR);
+            }
+            else 
+            {
+                return null;
+            }
+        }
+
+        public static List<Struct_Factura> GetFacturasBetweenDates(DateTime START, DateTime END, int p_UserID, bool p_printed, TipoDeFactura TF)
+        {
+            string T;
+            switch (TF)
+            {
+                case TipoDeFactura.FacturaA: T="A";break;
+                case TipoDeFactura.FacturaB: T="B";break;
+                case TipoDeFactura.FacturaC: T="C";break;
+                default: T = "0"; break;
+            }
+            Data2.Connection.D_Factura Conn = new Connection.D_Factura();
+            
+            DataTable DT = Conn.GetFacturasBetweenDates(p_UserID, START, END,T,p_printed);
+            if (DT != null)
+            {
+                List<Struct_Factura> FL = new List<Struct_Factura>();
+                foreach (DataRow R in DT.Rows)
+                {
+                    FL.Add(new Struct_Factura(R));
+                }
+                return FL;
+            }
+            else 
+            {
+                return null;
+            }
+        }
+
+        public Struct_Factura(DataRow dr) 
+        {
+            Id=int.Parse(dr["Id"].ToString());
+            UserId = int.Parse(dr["IdUser"].ToString());
+            serialAFIP = dr["SerialAFIP"].ToString();
+            serialTICKET = dr["SerialTICKET"].ToString();
+            printed = Data2.Statics.Conversion.convertSQLToBoolean(dr["Printed"]);
+            PrintAgain = Data2.Statics.Conversion.convertSQLToBoolean(dr["PrintAgain"]);
+            Transmitida = Data2.Statics.Conversion.convertSQLToBoolean(dr["Transmitida"]);
+            Fecha = DateTime.Parse(dr["Fecha"].ToString());
+            switch (dr["Tipo"].ToString())
+            {
+                case "A": FacturaTipo=TipoDeFactura.FacturaA;break;
+                case "B" :FacturaTipo=TipoDeFactura.FacturaB;break;
+                case "C" :FacturaTipo=TipoDeFactura.FacturaC;break;
+            }
+            senores = dr["Nombre"].ToString();
+            domicilio = dr["Domicilio"].ToString();
+            telefono = dr["Telefono"].ToString();
+            localidad = dr["Localidad"].ToString();
+            cuit = dr["Cuit"].ToString();
+            if (Conversion.convertSQLToBoolean(dr["RepInsc"])) Condicion_IVA = CondicionIVA.RespInscripto;
+            if (Conversion.convertSQLToBoolean(dr["RespNoInsc"])) Condicion_IVA = CondicionIVA.RespNoInscripto;
+            if (Conversion.convertSQLToBoolean(dr["Exento"])) Condicion_IVA = CondicionIVA.Exento;
+            if (Conversion.convertSQLToBoolean(dr["ConsumidorFinal"])) Condicion_IVA = CondicionIVA.ConsumidorFinal;
+            if (Conversion.convertSQLToBoolean(dr["RespMonotributo"])) Condicion_IVA = CondicionIVA.RespMonotributo;
+            if (Conversion.convertSQLToBoolean(dr["Contado"])) Pago = CondicionPago.Contado;
+            if (Conversion.convertSQLToBoolean(dr["CtaCte"])) Pago = CondicionPago.CtaCte;
+            IdCuentaCorriente = int.Parse(dr["IdCtaCte"].ToString());
+            if (Conversion.convertSQLToBoolean(dr["Cheque"])) cheque=true;
+            DNI = dr["Dni"].ToString();
+            IdTarjeta = int.Parse(dr["Idtargeta"].ToString());
+            NumeroTarjeta = dr["NumeroTarjeta"].ToString();
+            Observaciones = dr["Observaciones"].ToString();
+            subtotal = Conversion.GetDecimal(dr["SubTotal"].ToString());
+            ivas = Conversion.convertSQLToBoolean(dr["Ivas"]);
+            total = Conversion.GetDecimal(dr["Total"].ToString());
+
+            CargarDetalleDesdeDB();
+
+        }
+
+
+        void CargarDetalleDesdeDB() 
+        {
+            GestionDataSet.GetDetalleFacturaDataTable DT = new GestionDataSet.GetDetalleFacturaDataTable();
+            GestionDataSetTableAdapters.GetDetalleFacturaTableAdapter TA = new GestionDataSetTableAdapters.GetDetalleFacturaTableAdapter();
+            TA.Fill(DT, Id, UserId);
+            if (DT.Rows.Count > 0) 
+            {
+                MiDetalle = new List<Struct_DetalleFactura>();
+                foreach (DataRow _Row in DT.Rows) 
+                {
+                    Struct_DetalleFactura _DetalleFactura = new Struct_DetalleFactura(_Row, UserId);
+
+                    MiDetalle.Add(_DetalleFactura);
+                
+                }
+            }
+        }
 
         public Struct_Factura(int p_userId) 
         {

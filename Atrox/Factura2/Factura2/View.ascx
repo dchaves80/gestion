@@ -1,26 +1,26 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="View.ascx.cs" Inherits="Christoc.Modules.Factura2.View" %>
 <div id="DatosFactura" runat="server">
     <div>
-        <span>Tipo Factura:</span>
+        <span class="FormLabel">Tipo Factura:</span>
         <asp:DropDownList runat="server" ClientIDMode="Static" ID="LB_TipoFactura" OnSelectedIndexChanged="LB_TipoFactura_SelectedIndexChanged" AutoPostBack="true">
             <asp:ListItem> Factura A </asp:ListItem>
             <asp:ListItem> Factura B </asp:ListItem>
         </asp:DropDownList>
     </div>
     <div>
-        <span>Señor/es: </span>
+        <span class="FormLabel">Señor/es: </span>
         <asp:TextBox ID="txt_senores" runat="server" CssClass="AtroxTextBox"></asp:TextBox>
     </div>
     <div>
-        <span>Domicilio </span>
+        <span class="FormLabel">Domicilio </span>
         <asp:TextBox ID="txt_Domicilio" runat="server" CssClass="AtroxTextBox"></asp:TextBox>
-        <span>Teléfono </span>
+        <span class="FormLabel">Teléfono </span>
         <asp:TextBox ID="txt_Telefono" runat="server" CssClass="AtroxTextBox"></asp:TextBox>
     </div>
     <div>
-        <span>Localidad </span>
+        <span class="FormLabel">Localidad </span>
         <asp:TextBox ID="txt_Localidad" runat="server" CssClass="AtroxTextBox"></asp:TextBox>
-        <span>Cuit </span>
+        <span class="FormLabel">Cuit </span>
         <asp:TextBox ID="txt_Cuit" runat="server" CssClass="AtroxTextBox"></asp:TextBox>
     </div>
     <asp:Button Text="Guardar Datos Factura" CssClass="FormButton FirstElement LastElement" runat="server" ID="btn_setearFactura" OnClick="btn_setearFactura_Click" />
@@ -67,11 +67,12 @@
 <span id="prueba" style="background-color:red"> $000000 </span>
 <span style="margin-left:60%"> hola que tal?</span>
     </div>-->
-<div id="placeholder_totales" runat="server"> 
+<div id="placeholder_totales" runat="server" style="width:100%"> 
 
 
 </div>
-<div>
+<div runat="server" id="div_GuardarFactura">
+    <span class="FormLabel">Vendedor:</span><asp:DropDownList runat="server" ID="cmb_Vendedor"></asp:DropDownList><br />
     <asp:Button ID="GuardarFactura" runat="server" Text="Guardar Factura" OnClick="GuardarFactura_Click" CssClass="FormButton FirstElement LastElement"/>
 </div>
 

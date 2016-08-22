@@ -18,6 +18,9 @@ using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Services.Localization;
 using Data2.Class;
 using System.IO;
+using System.Collections.Generic;
+using System.Web.UI.WebControls;
+using System.Web;
 
 namespace Christoc.Modules.ConfiguracionesDeCuenta
 {
@@ -71,6 +74,26 @@ namespace Christoc.Modules.ConfiguracionesDeCuenta
 
         }
 
+        void LlenarCamposVendedores() 
+        {
+            cmb_ListadoVendedores.Items.Clear();
+            List<Struct_Vendedores> _LV  = Data2.Class.Struct_Vendedores.GetAllVendedores(UserId);
+            if (_LV != null)
+            {
+                for (int a = 0; a < _LV.Count; a++)
+                {
+                    ListItem LI = new ListItem(_LV[a].NombreVendedor + " [" + _LV[a].Porcentaje.ToString("#.##") + "%]", _LV[a].Id.ToString());
+                    cmb_ListadoVendedores.Items.Add(LI);
+                }
+
+            }
+            else 
+            {
+                cmb_ListadoVendedores.Enabled = false;
+            }
+
+        }
+
         void LlenarCamposUserConfig() 
         {
             
@@ -114,23 +137,144 @@ namespace Christoc.Modules.ConfiguracionesDeCuenta
             img_logo.ImageUrl = "~/Portals/" + PortalId.ToString() + "/UsersConfig/" + UserId.ToString() + "/Logo." + extension + "?preventcache=" + DateTime.Now.Millisecond.ToString();
         }
 
+
+        void BorrarVendedor(string p_ven) 
+        {
+            int idven = int.Parse(p_ven);
+            List<Struct_Vendedores> LV = Data2.Class.Struct_Vendedores.GetAllVendedores(UserId);
+            if (LV != null)
+            {
+                for (int a = 0; a < LV.Count; a++)
+                {
+                    if (LV[a].Id == idven)
+                    {
+                        LV[a].Delete();
+                    }
+
+                   
+                }
+            }
+            string newurl = Request.RawUrl;
+            if (newurl.Contains("?"))
+            {
+                newurl = newurl.Split('?')[0];
+            }
+
+            Response.Redirect(newurl);
+
+        }
+
+        void EdcVen() 
+        {
+            int idVen = int.Parse(Request["EdcVen"]);
+            decimal porc = Data2.Statics.Conversion.GetDecimal(Request["PR"]);
+            string name = Request["NV"];
+            bool changename = false;
+            bool changeporc = false;
+            if (Request["PR"] != "")
+            {
+                changeporc = true;
+            }
+            if (Request["NV"] != "")
+            {
+                changename = true;
+            }
+
+
+
+
+
+
+            List<Data2.Class.Struct_Vendedores> LV = Data2.Class.Struct_Vendedores.GetAllVendedores(UserId);
+
+            if (LV != null)
+            {
+                foreach (Data2.Class.Struct_Vendedores V in LV)
+                {
+                    if (V.Id == idVen)
+                    {
+                        if (changename) V.NombreVendedor = name;
+                        if (changeporc) V.Porcentaje = porc;
+                        V.Modify();
+                        break;
+                    }
+                }
+                
+            }
+            string newurl = Request.RawUrl;
+            if (newurl.Contains("?"))
+            {
+                newurl = newurl.Split('?')[0];
+            }
+            Response.Redirect(newurl);
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             
 
+
             try
             {
+
+                string hostname = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + ResolveUrl("~/");
+                hostn.Value = hostname;
+
+                
+
                 Data2.Connection.D_StaticWebService SWS = new Data2.Connection.D_StaticWebService();
                 KEY.Value = SWS.GetPrivateKeyByIdUser(UserId);
               
                     PC = Data2.Class.Struct_PrintConfiguration.GetPrintConfiguration(UserId);
-                    LlenarIMGLogo();
+                    
                     if (!IsPostBack) 
                     {
+                        if (Request["EdcVen"] != null 
+                            && Request["NV"] != null 
+                            && Request["PR"] != null) 
+                        {
+                            EdcVen();
+                        }
+
+                        if (Request["DelVen"] != null) 
+                        {
+                            BorrarVendedor(Request["DelVen"]);
+                        }
+
+                        if (Request["EdtVen"] != null)
+                        {
+                            
+                            
+                            int idVen = int.Parse(Request["EdtVen"]);
+
+                            List<Data2.Class.Struct_Vendedores> LV = Data2.Class.Struct_Vendedores.GetAllVendedores(UserId);
+
+                            if (LV!=null)
+                            {
+                                foreach (Data2.Class.Struct_Vendedores V in LV)
+                                {
+                                    if (V.Id==idVen)
+                                    {
+                                        txt_EdcNombre.Attributes.Add("placeholder",V.NombreVendedor);
+                                        txt_EdcPorcentaje.Attributes.Add("placeholder",V.Porcentaje.ToString("#.##"));
+                                        idEdition.Value = idVen.ToString();
+                                    }
+                                }
+                            }
+
+                        }
+                        else 
+                        {
+                            idEdition.Value = "0";
+                        }
+
                         LlenarCamposPrinter();
                         
                         LlenarCamposUserConfig();
-                    } 
+                        
+                    }
+                    LlenarIMGLogo();
+                    LlenarCamposVendedores();
               
                    
 
@@ -254,5 +398,17 @@ namespace Christoc.Modules.ConfiguracionesDeCuenta
                 }
             }
         }
+
+        protected void btn_AgregarVendedor_Click(object sender, EventArgs e)
+        {
+            if (txt_NombreVendedor.Text != "" && txt_PorcentajeVendedor.Text != "")
+            {
+                Data2.Class.Struct_Vendedores.Insert_Vendedor(txt_NombreVendedor.Text,UserId, Data2.Statics.Conversion.GetDecimal(txt_PorcentajeVendedor.Text));
+                Response.Redirect(Request.RawUrl);
+            }
+        }
+
+      
+       
     }
 }

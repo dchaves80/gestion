@@ -8,6 +8,12 @@ namespace Data2.Statics
 {
     public static class Conversion
     {
+        public static string DateTimeToSql(DateTime p_D) 
+        {
+            string d = p_D.Year + "-" + p_D.Month +"-" + p_D.Day + " " + p_D.Hour + ":" + p_D.Minute + ":" + p_D.Second;
+            return d;
+        }
+
         public static bool convertSQLToBoolean(object p_MySQLBOOLEAN)
         {
             string result = p_MySQLBOOLEAN.ToString().ToLower();

@@ -13,6 +13,7 @@
         <asp:DropDownList ID="cmbPrintersModels" runat="server" >
             <asp:ListItem Text="HASAR 262" Value="HASAR-262" ></asp:ListItem>
             <asp:ListItem Text="HASAR 272" Value="HASAR-272" ></asp:ListItem>
+            <asp:ListItem Text="HASAR 441" Value="HASAR-441" ></asp:ListItem>
             <asp:ListItem Text="HASAR 614" Value="HASAR-614" ></asp:ListItem>
             <asp:ListItem Text="HASAR 615" Value="HASAR-615" ></asp:ListItem>
             <asp:ListItem Text="HASAR 715" Value="HASAR-715" ></asp:ListItem>
@@ -66,7 +67,7 @@
             </div>
         <div class="SubMenu2">
             <span class="FormLabel">Subir Logo:</span><asp:FileUpload runat="server" ID="uploadfile"/>
-            <asp:Button Text="Guardar Logo" ID="btn_SubirLogo" runat="server" OnClick="btn_SubirLogo_Click" /> 
+            <asp:Button Text="Guardar Logo" ID="btn_SubirLogo" runat="server" OnClick="btn_SubirLogo_Click" CssClass="FormButton FirstElement LastElement" /> 
 
         </div>
         <div class="SubMenu2">
@@ -77,7 +78,7 @@
             <span class="FormLabel">¿ Mostrar Logo ?</span><asp:CheckBox Id="chk_MostrarLogoNegocio" runat="server"/>
         </div>
         <div>
-            <asp:Button Text="Guardar" ID="btnGuardarConfigNegocio" runat="server" OnClick="btnGuardarConfigNegocio_Click" /> 
+            <asp:Button Text="Guardar" ID="btnGuardarConfigNegocio" runat="server" OnClick="btnGuardarConfigNegocio_Click" CssClass="FormButton FirstElement LastElement" /> 
             </div>
     </div>
     <h3>Vendedores</h3>
@@ -88,60 +89,105 @@
             <br />
             <span class="FormLabel">Porcentaje:</span><asp:TextBox runat="server" ID="txt_PorcentajeVendedor"></asp:TextBox>
             <br />
-            <asp:Button Text="Agregar Vendedor" ID="btn_AgregarVendedor" runat="server" /> 
+            <asp:Button Text="Agregar Vendedor" ID="btn_AgregarVendedor" runat="server" CssClass="FormButton FirstElement LastElement" OnClick="btn_AgregarVendedor_Click" /> 
          </div>
 
         <div class="SubMenu2">
-            <span class="FormLabel">Vendedores disponibles:</span><asp:DropDownList runat="server" ID="cmb_ListadoVendedores"></asp:DropDownList>
+            <span class="FormLabel">Vendedores disponibles:</span><asp:DropDownList runat="server" ClientIDMode="Static" ID="cmb_ListadoVendedores"></asp:DropDownList>
             <br />
-            <asp:Button Text="Editar Vendedor" ID="btn_EditarVendedor" runat="server" /> 
-            <asp:Button Text="Borrar Vendedor" ID="btn_BorrarVendedor" runat="server" /> 
-
+            <asp:Button Text="Editar Vendedor" ID="btn_EditarVendedor" runat="server" CssClass="FormButton FirstElement LastElement" OnClientClick="EditV();return false;"/> 
+            <asp:Button Text="Borrar Vendedor" ID="btn_BorrarVendedor" runat="server" CssClass="FormButton FirstElement LastElement" OnClientClick="DeleteV();return false;" /> 
         </div>
 
+        
 
 
     </div>
 </div>
+<div id=dialogEdition>
+    Proporcione los <b>nuevos</b> datos del vendedor:<br />
+    <span class="FormLabel">Nombre Vendedor:</span><asp:TextBox runat="server" ClientIDMode="Static" ID="txt_EdcNombre"></asp:TextBox>
+    <br />
+    <span class="FormLabel">Porcentaje:</span><asp:TextBox runat="server" ClientIDMode="Static" ID="txt_EdcPorcentaje"></asp:TextBox>
+    <br />
+    <asp:Button Text="Guardar Cambios" ID="btnGuardarCambios" runat="server" CssClass="FormButton FirstElement LastElement" OnClientClick="EdcV();return false;" /> 
+</div>
 <asp:HiddenField ID="KEY" Value="" ClientIDMode="Static" runat="server" />
+<asp:HiddenField ID="hostn" Value="" ClientIDMode="Static" runat="server" />
+<asp:HiddenField ID="idEdition" Value="" ClientIDMode="Static" runat="server" />
 <script>
 
-    var Key = $("#KEY").val();
+    var idEdition = $("#idEdition").val();
+    var DE = $("#dialogEdition");
+    if (idEdition == "0") {
+        
+        DE.dialog({autoOpen: false });
+    } else
+    {
+        DE.dialog({ draggable: false, modal: true, autoOpen: true, title: "Edicion de Vendedor", resizable: false });
+    }
 
-    $("#accordionConfiguration").accordion({
-        active:false,
-        collapsible: true,
-        create: function (event, ui)
-        {
+    function EdcV()
+    {
+        var txtEdcName = $("#txt_EdcNombre").val();
+        var txtEdcPorc = $("#txt_EdcPorcentaje").val();
+        var hostn = $("#hostn").val();
+        window.location.href = hostn + "MyManager/Configuracion?EdcVen=" + idEdition + "&NV=" + txtEdcName + "&PR=" + txtEdcPorc;
+        return false;
+    }
 
+    function DeleteV()
+    {
+        var hostn = $("#hostn").val();
+        var IdVendedor = $("#cmb_ListadoVendedores option:selected").val();
+        window.location.href= hostn + "MyManager/Configuracion?DelVen=" + IdVendedor;
+        return false;
+    }
+
+        function EditV() {
+            var hostn = $("#hostn").val();
+            var IdVendedor = $("#cmb_ListadoVendedores option:selected").val();
+            window.location.href = hostn + "MyManager/Configuracion?EdtVen=" + IdVendedor;
+            return false;
         }
 
-    });
 
+        var Key = $("#KEY").val();
 
+        $("#accordionConfiguration").accordion({
+            active:false,
+            collapsible: true,
+            create: function (event, ui)
+            {
 
-    function SendCommand(Command) {
-
-        var request = $.ajax({
-            url: "../DesktopModules/ConfiguracionesDeCuenta/API/ModuleTask/SendPrinterCommand",
-            method: "GET",
-            data: { KEY: Key, COMMAND: Command},
-            dataType: "html",
-            cache: false
-        });
-
-        request.done(function (msg) {
-
-            if (msg == "OK") {
-
-            } else {
-               
             }
+
         });
 
-        request.fail(function (jqXHR, textStatus) {
-            alert(textStatus);
-        });
-    }
+
+
+        function SendCommand(Command) {
+
+            var request = $.ajax({
+                url: "../DesktopModules/ConfiguracionesDeCuenta/API/ModuleTask/SendPrinterCommand",
+                method: "GET",
+                data: { KEY: Key, COMMAND: Command},
+                dataType: "html",
+                cache: false
+            });
+
+            request.done(function (msg) {
+
+                if (msg == "OK") {
+
+                } else {
+               
+                }
+            });
+
+            request.fail(function (jqXHR, textStatus) {
+                alert(textStatus);
+            });
+        }
     
 </script>

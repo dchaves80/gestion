@@ -193,6 +193,24 @@ namespace Christoc.Modules.Factura2 {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl placeholder_totales;
         
         /// <summary>
+        /// div_GuardarFactura control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl div_GuardarFactura;
+        
+        /// <summary>
+        /// cmb_Vendedor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cmb_Vendedor;
+        
+        /// <summary>
         /// GuardarFactura control.
         /// </summary>
         /// <remarks>
