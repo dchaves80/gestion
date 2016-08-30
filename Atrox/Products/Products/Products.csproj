@@ -111,7 +111,9 @@
     <Content Include="View.ascx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Products.dnn" />
+    <Content Include="Products.dnn">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="BuildScripts\ModulePackage.targets" />

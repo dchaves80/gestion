@@ -124,17 +124,21 @@ namespace Christoc.Modules.ConfiguracionesDeCuenta
 
         void LlenarIMGLogo() 
         {
-            //http://190.105.214.230/Portals/0/UsersConfig/1/Logo.gif
-            //Direcotory = PortalSettings.HomeDirectoryMapPath + "\\" + "UsersConfig\\" + UserId.ToString();
-            string DIR = PortalSettings.HomeDirectoryMapPath + "\\" + "UsersConfig\\" + UserId.ToString();
-            string[] FilesList = Directory.GetFiles(DIR, "Logo.*");
-            string extension = "";
-            if (FilesList.Length == 1)
+            try
             {
-                string[] splitter = { "." };
-                extension = FilesList[0].Split(splitter, StringSplitOptions.None)[1];
-            }
-            img_logo.ImageUrl = "~/Portals/" + PortalId.ToString() + "/UsersConfig/" + UserId.ToString() + "/Logo." + extension + "?preventcache=" + DateTime.Now.Millisecond.ToString();
+
+                //http://190.105.214.230/Portals/0/UsersConfig/1/Logo.gif
+                //Direcotory = PortalSettings.HomeDirectoryMapPath + "\\" + "UsersConfig\\" + UserId.ToString();
+                string DIR = PortalSettings.HomeDirectoryMapPath + "\\" + "UsersConfig\\" + UserId.ToString();
+                string[] FilesList = Directory.GetFiles(DIR, "Logo.*");
+                string extension = "";
+                if (FilesList.Length == 1)
+                {
+                    string[] splitter = { "." };
+                    extension = FilesList[0].Split(splitter, StringSplitOptions.None)[1];
+                }
+                img_logo.ImageUrl = "~/Portals/" + PortalId.ToString() + "/UsersConfig/" + UserId.ToString() + "/Logo." + extension + "?preventcache=" + DateTime.Now.Millisecond.ToString();
+            } catch{}
         }
 
 

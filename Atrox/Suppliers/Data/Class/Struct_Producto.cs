@@ -309,6 +309,25 @@ namespace Data2.Class
 
         }
 
+        public static List<Struct_Producto> SearchProducto(int p_IdUser, string p_SearchString, Connection.D_Articles.SearchCondition p_SearchCondition) 
+        {
+            DataTable DTResult = Connection.D_Articles.SearchArticle(p_IdUser, p_SearchString, p_SearchCondition);
+
+            if (DTResult!=null && DTResult.Rows.Count > 0)
+            {
+                List<Struct_Producto> _list = new List<Struct_Producto>();
+                foreach (DataRow R in DTResult.Rows)
+                {
+                    _list.Add(DataRowToProduct(R));
+                }
+                return _list;
+            }
+            else 
+            {
+                return null;
+            }
+        }
+
         public static Struct_Producto Get_SingleArticle(int p_IdUser, int p_IdArticle) 
         {
             DataRow DR = Connection.D_Articles.SelectSingleArticle(p_IdUser, p_IdArticle);

@@ -1,0 +1,5 @@
+C:\DNN\bin\Facturacion3.dll
+C:\DNN\bin\Facturacion3.pdb
+C:\DNN\DesktopModules\Atrox\Facturacion3\Facturacion3\obj\Debug\Facturacion3.csprojResolveAssemblyReference.cache
+C:\DNN\DesktopModules\Atrox\Facturacion3\Facturacion3\obj\Debug\Facturacion3.dll
+C:\DNN\DesktopModules\Atrox\Facturacion3\Facturacion3\obj\Debug\Facturacion3.pdb

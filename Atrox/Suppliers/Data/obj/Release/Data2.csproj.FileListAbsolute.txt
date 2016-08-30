@@ -1,11 +1,9 @@
 C:\DNN\DesktopModules\Atrox\Suppliers\Data\bin\Release\Data2.dll.config
 C:\DNN\DesktopModules\Atrox\Suppliers\Data\bin\Release\Data2.dll
 C:\DNN\DesktopModules\Atrox\Suppliers\Data\bin\Release\Data2.pdb
-C:\DNN\DesktopModules\Atrox\Suppliers\Data\obj\Release\Data2.dll
-C:\DNN\DesktopModules\Atrox\Suppliers\Data\obj\Release\Data2.pdb
 C:\DNN\bin\Data2.dll.config
 C:\DNN\bin\Data2.dll
 C:\DNN\bin\Data2.pdb
+C:\DNN\DesktopModules\Atrox\Suppliers\Data\obj\Release\Data2.dll
+C:\DNN\DesktopModules\Atrox\Suppliers\Data\obj\Release\Data2.pdb
 C:\DNN\DesktopModules\Atrox\Suppliers\Data\obj\Release\Data2.csprojResolveAssemblyReference.cache
-C:\DNN\bin\Data2.dll.CodeAnalysisLog.xml
-C:\DNN\bin\Data2.dll.lastcodeanalysissucceeded

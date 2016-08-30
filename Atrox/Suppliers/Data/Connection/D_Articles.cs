@@ -9,6 +9,9 @@ namespace Data2.Connection
 {
     public static class D_Articles
     {
+
+        
+
         public class PagingInfo
         {
             public DataTable DATA;
@@ -19,6 +22,40 @@ namespace Data2.Connection
             {
                 DATA = p_DATA;
                 CantidadPaginas = p_CantidadPaginas;
+            }
+
+        }
+
+        public enum SearchCondition {PorDescripcion, PorCodigoInterno, PorCodigoBarra}
+
+        public static DataTable SearchArticle(int p_iduser, string p_searchstring, SearchCondition p_searchcondition) 
+        {
+            string strsearchcondition;
+            switch (p_searchcondition) 
+            {
+                case SearchCondition.PorCodigoBarra:
+                    strsearchcondition = "codb";
+                    break;
+                case SearchCondition.PorCodigoInterno:
+                    strsearchcondition = "codi";
+                    break;
+                case SearchCondition.PorDescripcion:
+                    strsearchcondition = "desc";
+                    break;
+                default:
+                    strsearchcondition = "desc";
+                    break;
+            }
+            GestionDataSetTableAdapters.SearchArticleTableAdapter TA = new GestionDataSetTableAdapters.SearchArticleTableAdapter();
+            GestionDataSet.SearchArticleDataTable DT = new GestionDataSet.SearchArticleDataTable();
+            TA.Fill(DT, p_iduser, p_searchstring, strsearchcondition);
+            if (DT.Rows.Count > 0)
+            {
+                return DT;
+            }
+            else 
+            {
+                return null;
             }
 
         }

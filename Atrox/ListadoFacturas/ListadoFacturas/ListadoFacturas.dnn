@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="ListadoFacturas" type="Module" version="00.00.01">
+    <package name="ListadoFacturas" type="Module" version="01.00.00">
       <friendlyName>ListadoFacturas</friendlyName>
       <description>Christoc.com ListadoFacturas module</description>
       <iconFile>Images/icon_extensions.gif</iconFile>

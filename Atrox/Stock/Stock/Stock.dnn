@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="Stock" type="Module" version="4.00.00">
+    <package name="Stock" type="Module" version="5.00.00">
       <friendlyName>Stock</friendlyName>
       <description>Christoc.com Stock module</description>
       <iconFile>Images/icon_extensions.gif</iconFile>

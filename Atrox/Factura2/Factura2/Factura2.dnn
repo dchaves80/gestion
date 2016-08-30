@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="Factura2" type="Module" version="02.00.01">
+    <package name="Factura2" type="Module" version="03.00.00">
       <friendlyName>Factura2</friendlyName>
       <description>Christoc.com Factura2 module</description>
       <iconFile>Images/icon_extensions.gif</iconFile>
