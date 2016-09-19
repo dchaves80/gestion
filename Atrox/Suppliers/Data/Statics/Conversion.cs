@@ -3,11 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 
 namespace Data2.Statics
 {
     public static class Conversion
     {
+        public static string GetJasonFromList<T>(object MyList) 
+        {
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            StringBuilder SB = new StringBuilder();
+            
+            return JSS.Serialize((T)MyList);
+        }
+
         public static string DateTimeToSql(DateTime p_D) 
         {
             string d = p_D.Year + "-" + p_D.Month +"-" + p_D.Day + " " + p_D.Hour + ":" + p_D.Minute + ":" + p_D.Second;

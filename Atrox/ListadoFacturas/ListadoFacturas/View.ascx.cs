@@ -134,8 +134,14 @@ namespace Christoc.Modules.ListadoFacturas
             }
         }
 
+
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            
+            
             string[] split = {"?"};
             urlbase.Value = Request.RawUrl.Split(split,StringSplitOptions.None)[0]; 
             try
@@ -146,9 +152,14 @@ namespace Christoc.Modules.ListadoFacturas
                     LlenarFactura(int.Parse(Request["VC"].ToString()));
                 }
 
-                if (Session[sessionkey] != null) 
+                if (Session[sessionkey] != null)
                 {
                     BuildSearch();
+                    BuildGraph();
+                }
+                else 
+                {
+                    HF_Data.Value = "0";
                 }
 
             }
@@ -156,6 +167,43 @@ namespace Christoc.Modules.ListadoFacturas
             {
                 Exceptions.ProcessModuleLoadException(this, exc);
             }
+        }
+
+        private void BuildGraph()
+        {
+            
+            List<Data2.Class.Struct_Factura> _LF = Session[sessionkey] as List<Data2.Class.Struct_Factura>;
+            if (_LF != null && _LF.Count > 0)
+            {
+                HF_Data.Value = "1";
+                int _FA = 0;
+                int _FB = 0;
+                int _FC = 0;
+                for (int a = 0; a < _LF.Count; a++)
+                {
+                    switch (_LF[a].FacturaTipo)
+                    {
+                        case Struct_Factura.TipoDeFactura.FacturaA:
+                            _FA++;
+                            break;
+                        case Struct_Factura.TipoDeFactura.FacturaB:
+                            _FB++;
+                            break;
+                        case Struct_Factura.TipoDeFactura.FacturaC:
+                            _FC++;
+                            break;
+                    }
+                }
+
+                HF_DataCant.Value = _FA.ToString() + "," + _FB.ToString() + "," + _FC.ToString();
+
+                HF_DataTitle.Value = "Facturas periodo:" + _LF[0].Fecha.ToShortDateString() + "-" + _LF[_LF.Count - 1].Fecha.ToShortDateString();
+            }
+            else 
+            {
+                HF_Data.Value = "0";
+            }
+
         }
 
         public ModuleActionCollection ModuleActions
@@ -252,8 +300,12 @@ namespace Christoc.Modules.ListadoFacturas
 
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
-            DateTime Start = CalendarDesde.SelectedDate;
-            DateTime End = CalendarHasta.SelectedDate;
+
+
+            
+
+            DateTime Start = DateTime.Parse(txt_fechadesde.Text);
+            DateTime End = DateTime.Parse(txt_fechahasta.Text);
             Start = Start.AddHours(-Start.Hour);
             End = End.AddHours(24 - End.Hour);
             
@@ -276,6 +328,7 @@ namespace Christoc.Modules.ListadoFacturas
                 }
                 Session.Add(sessionkey, _LF);
                 BuildSearch();
+                BuildGraph();
             }
 
 

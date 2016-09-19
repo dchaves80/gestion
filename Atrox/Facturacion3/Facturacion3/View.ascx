@@ -7,8 +7,8 @@
         <div>
             <span class="FormLabel">Tipo de Factura</span>
             <asp:DropDownList runat="server" ID="Factura_Tipo" ClientIDMode="Static">
-                <asp:ListItem Text="Factura A" Value="A" Selected="True"></asp:ListItem>
-                <asp:ListItem Text="Factura B" Value="B"></asp:ListItem>
+                <asp:ListItem Text="Factura A" Value="A"></asp:ListItem>
+                <asp:ListItem Text="Factura B" Value="B" Selected="True"></asp:ListItem>
                 <asp:ListItem Text="Factura C" Value="C"></asp:ListItem>
             </asp:DropDownList>
         </div>
@@ -154,8 +154,8 @@
 <script>
 
     function NewFactura() {
-        Cookies.set('cookie_condicioniva', 'RI');
-        Cookies.set('cookie_tipodefactura', 'A');
+        Cookies.set('cookie_condicioniva', 'E');
+        Cookies.set('cookie_tipodefactura', 'B');
         Cookies.set('cookie_nombre', '');
         Cookies.set('cookie_domicilio', '');
         Cookies.set('cookie_localidad', '');

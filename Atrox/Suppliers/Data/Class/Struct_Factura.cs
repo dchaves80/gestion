@@ -174,7 +174,23 @@ namespace Data2.Class
                     return false;
                 }
             }
-            else
+            else if (FacturaTipo == TipoDeFactura.FacturaC)
+            {
+                int IdFactura = F.InsertFactura(UserId, "", "", DateTime.Now, "C", senores, domicilio, telefono, localidad, cuit, RespInscripto, RespNoInscripto, Exento, ConsumidorFinal, RespMonotributo, Contado, CtaCte, 0, false, "", false, 0, "", Observaciones, GetTotalSinIva(), true, GetTotalConIvaIncluido());
+
+                if (IdFactura != 0)
+                {
+                    Id = IdFactura;
+                    F.InsertarDetalleFactura(this);
+                    SetVendedor(p_IdVendedor);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else 
             {
                 return false;
             }

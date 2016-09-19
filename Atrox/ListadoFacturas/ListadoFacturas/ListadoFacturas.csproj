@@ -99,6 +99,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Chart.js" />
     <Content Include="Documentation\Documentation.css" />
     <Content Include="Documentation\Documentation.html" />
     <Content Include="Edit.ascx" />
@@ -109,7 +110,9 @@
     <Content Include="View.ascx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ListadoFacturas.dnn" />
+    <Content Include="ListadoFacturas.dnn">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="BuildScripts\ModulePackage.targets" />
@@ -182,6 +185,6 @@
   <Target Name="AfterBuild" DependsOnTargets="PackageModule">
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>copy /Y $(ProjectDir)\*.ascx $(ProjectDir)\..\..\..\$(ProjectName)</PostBuildEvent>
+    <PostBuildEvent>copy /Y $(ProjectDir)\*.* $(ProjectDir)\..\..\..\$(ProjectName)</PostBuildEvent>
   </PropertyGroup>
 </Project>

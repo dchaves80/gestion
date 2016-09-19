@@ -436,7 +436,9 @@ namespace Christoc.Modules.Facturacion3
 
         protected void btn_NuevaVenta_Click(object sender, EventArgs e)
         {
-            Session.Add(key_session_factura, new Data2.Class.Struct_Factura(UserId));
+            Struct_Factura F = new Data2.Class.Struct_Factura(UserId);
+            F.setFacturaTipo(Struct_Factura.TipoDeFactura.FacturaB);
+            Session.Add(key_session_factura,F);
             redirecttome();
 
         }

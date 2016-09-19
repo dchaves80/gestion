@@ -13,22 +13,22 @@ namespace Christoc.Modules.ListadoFacturas {
     public partial class View {
         
         /// <summary>
-        /// CalendarDesde control.
+        /// txt_fechadesde control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar CalendarDesde;
+        protected global::System.Web.UI.WebControls.TextBox txt_fechadesde;
         
         /// <summary>
-        /// CalendarHasta control.
+        /// txt_fechahasta control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar CalendarHasta;
+        protected global::System.Web.UI.WebControls.TextBox txt_fechahasta;
         
         /// <summary>
         /// cmb_TipoComprobante control.
@@ -164,5 +164,41 @@ namespace Christoc.Modules.ListadoFacturas {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField urlbase;
+        
+        /// <summary>
+        /// HF_Data control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HF_Data;
+        
+        /// <summary>
+        /// HF_DataCant control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HF_DataCant;
+        
+        /// <summary>
+        /// HF_DataColors control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HF_DataColors;
+        
+        /// <summary>
+        /// HF_DataTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HF_DataTitle;
     }
 }
