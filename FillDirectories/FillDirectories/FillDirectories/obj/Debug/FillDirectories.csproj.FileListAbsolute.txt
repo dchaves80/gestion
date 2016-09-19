@@ -1,0 +1,8 @@
+C:\FillDirectories\FillDirectories\FillDirectories\bin\Debug\FillDirectories.exe
+C:\FillDirectories\FillDirectories\FillDirectories\bin\Debug\FillDirectories.pdb
+C:\FillDirectories\FillDirectories\FillDirectories\obj\Debug\FillDirectories.csprojResolveAssemblyReference.cache
+C:\FillDirectories\FillDirectories\FillDirectories\obj\Debug\FillDirectories.Form1.resources
+C:\FillDirectories\FillDirectories\FillDirectories\obj\Debug\FillDirectories.Properties.Resources.resources
+C:\FillDirectories\FillDirectories\FillDirectories\obj\Debug\FillDirectories.csproj.GenerateResource.Cache
+C:\FillDirectories\FillDirectories\FillDirectories\obj\Debug\FillDirectories.exe
+C:\FillDirectories\FillDirectories\FillDirectories\obj\Debug\FillDirectories.pdb
