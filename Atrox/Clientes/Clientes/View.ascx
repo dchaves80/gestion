@@ -4,7 +4,7 @@
     <div>
         <asp:Button Text="Agregar cliente" ClientIDMode="Static" CssClass="FormButton FirstElement LastElement" runat="server" ID="btnAgregarCliente" OnClientClick="ShowABM();return false;" />
         <asp:Button Text="Cancelar" ClientIDMode="Static" CssClass="FormButton FirstElement LastElement" runat="server" ID="btnCancelar" OnClientClick="HideABM();return false;" />
-        <asp:Button Text="Guardar" ClientIDMode="Static" CssClass="FormButton FirstElement LastElement" runat="server" ID="btnGuardar" OnClick="btnGuardar_Click"/>
+        <asp:Button Text="Guardar" ClientIDMode="Static" CssClass="FormButton FirstElement LastElement" runat="server" ID="btnGuardar" OnClick="btnGuardar_Click" OnClientClick="Guardar()"/>
         <div id="ABM_Controls">
             <div class="DivMobileFix">
                 <span class="FormLabel">Razón social:</span>
@@ -45,6 +45,14 @@
                 <asp:TextBox placeholder="0" ID="txt_descuento" runat="server" ClientIDMode="Static" CssClass="AtroxTextBoxMount"></asp:TextBox>
             </div>
             <div class="DivMobileFix">
+                <span class="FormLabel">Limite De Credito:</span>
+                <asp:TextBox placeholder="0" ID="txt_limite" runat="server" ClientIDMode="Static" CssClass="AtroxTextBoxMount"></asp:TextBox>
+            </div>
+            <div class="DivMobileFix">
+                <span class="FormLabel">Suspendida:</span>
+                <asp:CheckBox ID="chk_Suspendida" runat="server" ClientIDMode="Static" CssClass="AtroxTextBoxMount"></asp:CheckBox>
+            </div>
+            <div class="DivMobileFix">
                 <span class="FormLabel">Observaciones:</span>
                 <asp:TextBox ID="txt_observaciones" runat="server" ClientIDMode="Static" CssClass="AtroxTextBox" TextMode="MultiLine" Columns="20" Rows="10"></asp:TextBox>
 
@@ -63,56 +71,92 @@
             <div class="atroxseparator"></div>
         </div>
     </div>
-
-    <div style="float:left">
+   
+    <div style="display:inline-block">
         <span class="FormLabel">Buscar cliente:</span>
-        <asp:TextBox runat="server" ID="txtBuscar" CssClass="AtroxTextBox"></asp:TextBox>
-        <asp:Button runat="server" ID="btnBuscar" CssClass="FormButton FirstElement Lastelement" Text="Buscar" OnClientClick="Search();return false;" />
+        <asp:TextBox runat="server" ID="txtBuscar" ClientIDMode="Static" CssClass="AtroxTextBox"></asp:TextBox>
+        <asp:Button runat="server" ID="btnBuscar" ClientIDMode="Static" CssClass="FormButton FirstElement Lastelement" Text="Buscar" OnClientClick="Search();return false;" />
     </div>
 
 
 
     <div id="_ProgressBarClientes">
     </div>
+    
 
     <asp:HiddenField runat="server" ClientIDMode="Static" ID="HF_Host" />
+    <asp:HiddenField runat="server" ClientIDMode="Static" ID="HF_RawHost" />
     <asp:HiddenField runat="server" ClientIDMode="Static" ID="K" />
+    <asp:HiddenField runat="server" ClientIdMode="Static" ID="HF_EU" />
+
+
 
 
 
 </div>
 
-
+<div id="ClientTableSearch">
+        <table style="width:100%">
+            <tbody id="CSR">
+                <tr class="metroheader">
+                <th>
+                    Razon Social
+                </th>
+                <th>
+                    Localidad
+                </th>
+                <th>
+                    Domicilio
+                </th>
+                <th>
+                    E-mail
+                </th>
+                <th>
+                    Editar
+                </th>
+                </tr>
+            </tbody>
+        </table>
+</div>
 
 
 
 <script>
-
-    var MyHost = $('HF_Host').val();
+    var RawHost = $('#HF_RawHost').val();
+    var MyHost = $('#HF_Host').val();
+    var K = $('#K').val();
+    var Clientes = null;
     $("#ABM_Controls").hide();
     $("#btnCancelar").hide();
     $("#btnGuardar").hide();
 
+    var UIID = $('#HF_EU').val();
+
+    if (UIID != "0")
+    {
+        ShowABM();
+    }
+
     function ShowABM()
     {
-        $("#ABM_Controls").show(1000);
-        $("#btnCancelar").show(1000);
-        $("#btnAgregarCliente").hide(1000);
-        $("#btnGuardar").show(1000);
+        $("#ABM_Controls").show(250);
+        $("#btnCancelar").show(250);
+        $("#btnAgregarCliente").hide(250);
+        $("#btnGuardar").show(250);
 
         
     }
 
     function HideABM() {
-        $("#ABM_Controls").hide(1000);
-        $("#btnCancelar").hide(1000);
-        $("#btnAgregarCliente").show(1000);
-        $("#btnGuardar").hide(1000);
+        $("#ABM_Controls").hide(250);
+        $("#btnCancelar").hide(250);
+        $("#btnAgregarCliente").show(250);
+        $("#btnGuardar").hide(250);
 
 
     }
 
-    var ProgressBar = new ProgressBar.Circle('#_ProgressBarClientes',
+    var ProgressBar = new ProgressBar.Line('#_ProgressBarClientes',
         {
             strokeWidth: 12,
             //color: '#b3e5fc',
@@ -122,7 +166,6 @@
             text:
                 {
                     //color:'#111111',
-                    value: 'TextoPrueba',
                     alignToBottom: false
 
                 },
@@ -133,22 +176,27 @@
                 bar.path.setAttribute('stroke', state.color);
             }
         });
-    ProgressBar.text.style.fontFamily = '"Roboto"';
+    /*ProgressBar.text.style.fontFamily = '"Roboto"';
     ProgressBar.text.style.fontSize = '15px';
     ProgressBar.text.style.color = '#4caf50';
     ProgressBar.text.style.fontWeight = 'Bolder';
-    $('#_ProgressBarClientes').hide();
+    $('#_ProgressBarClientes').hide();*/
 
     function Search() {
-        $('#_ProgressBarClientes').show('slide', 500);
+        Clientes = null;
+        $("#CSR").find(".resultline").remove();
+        //$('#_ProgressBarClientes').show('slide',1000);
         var ocuppied = false;
         var bool = false;
+        var SS = $('#txtBuscar').val();
+        var progress = 0;
+        ProgressBar.set(0);
         $.ajax(
             {
                 cache: false,
                 async: true,
-                url: 'http://190.105.214.230/DesktopModules/Facturacion3/API/ModuleTask/SA?k=111AAA&ss=%%&sc=de',
-                data: { k: '111AA', ss: 'caja', sc: 'de' },
+                url: MyHost + 'SC',
+                data: { k: K, ss: SS,rnd:Math.random()},
                 dataType: 'json',
                 xhr: function () {
                     var xhr = new window.XMLHttpRequest();
@@ -162,16 +210,21 @@
                     xhr.addEventListener("progress", function (evt) {
                         if (evt.lengthComputable) {
 
+                            
                             progress = evt.loaded / evt.total;
-                            ProgressBar.setText(Math.round(progress * 100) + ' %');
+                            
+                            //ProgressBar.setText(Math.round(progress * 100) + ' %');
                             ocuppied = true;
                             ProgressBar.animate(progress,
                             {
-                                duration: 100,
-                                easing: 'easeIn'
+                                duration: 500,
+                                easing: 'easeOut'
 
                             }, function () {
                                 ocuppied = false;
+                                if (Math.round(progress * 100) == 100) {
+                                    //$('#_ProgressBarClientes').hide('slide', 2000);
+                                }
                             });
                             //Do something with download progress
                         }
@@ -180,11 +233,73 @@
                     return xhr;
                 },
                 success: function (MyData) {
-                    $('#_ProgressBarClientes').hide('slide', 500);
+
+                    if (MyData != "null") {
+                        InterpeterJason(MyData);
+                    } else
+                    {
+                        Clientes = null;
+                    }
                 }
             });
     }
 
+    function editclient(idc)
+    {
+       
+        //$("#HF_EU").val("0");
+            window.location.href = RawHost + "?IDC=" + idc;
 
+       
+    }
+
+    function FillFields(C)
+    {
+        
+    }
+
+    function Guardar()
+    {
+        $('#HF_EU').val("0");
+    }
+
+    function InterpeterJason(DATA)
+    {
+        
+        
+        
+        Clientes = JSON.parse(DATA);
+        var c = "";
+        for (i = 0; i < Clientes.length; i++)
+        {
+            if (c == "par") {
+                c = "impar";
+            } else
+            {
+                c = "par";
+            }
+
+            var r = "<tr class='animationline resultline metro[pi]line'><td class='descripcionarticulo' style='text-decoration:[td]'>[RS]<span style='color:red'>[Susp]</span></td><td class='fixcell'>[L]</td><td class='fixcell'>[D]</td><td class='fixcell'>[E]</td><td><div class='buttoncell' onclick='editclient([IDC])'>Editar</div></td></tr>"
+            r = r.replace("[pi]", c);
+            r = r.replace("[RS]", Clientes[i]["RS"]);
+            r = r.replace("[L]", Clientes[i]["LOCALIDAD"]);
+            r = r.replace("[D]", Clientes[i]["DOMICILIO"]);
+            r = r.replace("[E]", Clientes[i]["EMAIL"]);
+            r = r.replace("[IDC]", Clientes[i]["ID"]);
+            
+            if (Clientes[i]["SUSPENDIDA"] == true) {
+                r = r.replace("[Susp]", " (Suspendida) ");
+                r = r.replace("[td]", "line-through");
+
+            } else
+            {
+                r = r.replace("[Susp]", " ");
+                r = r.replace("[td]", 'none');
+            }
+            $("#CSR").append(r);
+
+        }
+
+    }
 
 </script>

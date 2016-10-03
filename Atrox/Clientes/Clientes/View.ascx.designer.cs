@@ -112,6 +112,24 @@ namespace Christoc.Modules.Clientes {
         protected global::System.Web.UI.WebControls.TextBox txt_descuento;
         
         /// <summary>
+        /// txt_limite control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_limite;
+        
+        /// <summary>
+        /// chk_Suspendida control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chk_Suspendida;
+        
+        /// <summary>
         /// txt_observaciones control.
         /// </summary>
         /// <remarks>
@@ -157,6 +175,15 @@ namespace Christoc.Modules.Clientes {
         protected global::System.Web.UI.WebControls.HiddenField HF_Host;
         
         /// <summary>
+        /// HF_RawHost control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HF_RawHost;
+        
+        /// <summary>
         /// K control.
         /// </summary>
         /// <remarks>
@@ -164,5 +191,14 @@ namespace Christoc.Modules.Clientes {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField K;
+        
+        /// <summary>
+        /// HF_EU control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HF_EU;
     }
 }

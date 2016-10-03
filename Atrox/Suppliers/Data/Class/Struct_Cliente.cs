@@ -25,9 +25,20 @@ namespace Data2.Class
             public string EMAIL;
             public int IDUSER;
             public int ID=0;
+            public decimal LIMITEDECREDITO;
+            public bool SUSPENDIDA;
 
 
-               
+            public static Struct_Cliente GetClient(int IdCliente, int IdUser) 
+            {
+                Connection.D_Clientes CL = new Connection.D_Clientes();
+                DataRow DR =  CL.GetClient(IdCliente, IdUser);
+                if (DR != null) 
+                {
+                    return new Struct_Cliente(DR);
+                } else { return null; }
+            }     
+
 
             public static List<Struct_Cliente> SearchClient(string searchstring, int IdUser) 
             {
@@ -64,6 +75,8 @@ namespace Data2.Class
                 DESCUENTO = Statics.Conversion.GetDecimal(DR["Descuento"].ToString());
                 EMAIL = DR["Email"].ToString();
                 IDUSER = int.Parse(DR["IdUser"].ToString());
+                LIMITEDECREDITO = Statics.Conversion.GetDecimal(DR["LimiteDeCredito"].ToString());
+                SUSPENDIDA = Statics.Conversion.convertSQLToBoolean(DR["Suspendida"].ToString());
             }
 
             public Struct_Cliente
@@ -78,7 +91,9 @@ namespace Data2.Class
                 string p_TIPOIVA,
                 decimal p_DESCUENTO,
                 string p_EMAIL,
-                int p_IDUSER
+                int p_IDUSER,
+                decimal p_LIMITEDECREDITO,
+                bool p_SUSPENDIDA
                 )
             {
                 RS = p_RS;
@@ -92,6 +107,8 @@ namespace Data2.Class
                 DESCUENTO = p_DESCUENTO;
                 EMAIL = p_EMAIL;
                 IDUSER = p_IDUSER;
+                LIMITEDECREDITO = p_LIMITEDECREDITO;
+                SUSPENDIDA = p_SUSPENDIDA;
             }
 
             public bool Guardar() 
@@ -100,14 +117,14 @@ namespace Data2.Class
                 if (ID == 0)
                 {
                    
-                    int reg = C.insertarCliente(RS, DNI, PAIS, PROVINCIA, LOCALIDAD, DOMICILIO, OBSERVACIONES, TIPOIVA, DESCUENTO, EMAIL, IDUSER);
+                    int reg = C.insertarCliente(RS, DNI, PAIS, PROVINCIA, LOCALIDAD, DOMICILIO, OBSERVACIONES, TIPOIVA, DESCUENTO, EMAIL, IDUSER, LIMITEDECREDITO,SUSPENDIDA);
                     ID = reg;
                     
                     
                 }
                 else 
                 {
-                    C.actualizarCliente(RS, DNI, PAIS, PROVINCIA, LOCALIDAD, DOMICILIO, OBSERVACIONES, TIPOIVA, DESCUENTO, EMAIL, IDUSER,ID);
+                    C.actualizarCliente(RS, DNI, PAIS, PROVINCIA, LOCALIDAD, DOMICILIO, OBSERVACIONES, TIPOIVA, DESCUENTO, EMAIL, IDUSER,ID,LIMITEDECREDITO,SUSPENDIDA);
                     
                 }
 

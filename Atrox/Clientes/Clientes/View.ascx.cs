@@ -38,9 +38,13 @@ namespace Christoc.Modules.Clientes
     public partial class View : ClientesModuleBase, IActionable
     {
 
+        string KeyIDC = "IDC";
+
         void ConfigHF() 
         {
+            string[] splitter = { "?" };
             HF_Host.Value = "/DesktopModules/Clientes/API/ModuleTask/";
+            HF_RawHost.Value = Request.RawUrl.Split(splitter,StringSplitOptions.None)[0];
             Data2.Connection.D_StaticWebService SWS = new Data2.Connection.D_StaticWebService();
             K.Value = SWS.GetPrivateKeyByIdUser(UserId);
 
@@ -63,6 +67,7 @@ namespace Christoc.Modules.Clientes
 
         private void ConfigFields()
         {
+           
             if (cmbprovincia.Items.Count == 0)
             {
                 cmbprovincia.Items.Clear();
@@ -78,6 +83,36 @@ namespace Christoc.Modules.Clientes
                     }
                 }
             }
+
+            if (Request[KeyIDC] != null && !IsPostBack)
+            {
+                Session.Remove(KeyIDC);
+                Session.Add(KeyIDC, Request[KeyIDC].ToString());
+
+                Data2.Class.Struct_Cliente SC = Data2.Class.Struct_Cliente.GetClient(int.Parse(Session[KeyIDC].ToString()), UserId);
+                if (SC != null && !IsPostBack)
+                {
+                    txt_descuento.Text = SC.DESCUENTO.ToString("#.00");
+                    txt_dnicuilcuit.Text = SC.DNI;
+                    txt_domicilio.Text = SC.DOMICILIO;
+                    txt_email.Text = SC.EMAIL;
+                    txt_limite.Text = SC.LIMITEDECREDITO.ToString("#.00");
+                    txt_localidad.Text = SC.LOCALIDAD;
+                    txt_observaciones.Text = SC.OBSERVACIONES;
+                    txt_razonsocial.Text = SC.RS;
+                    cmbpais.SelectedValue = SC.PAIS;
+                    cmbprovincia.SelectedValue = SC.PROVINCIA;
+                    cmbsituacion.SelectedValue = SC.TIPOIVA;
+                    HF_EU.Value = SC.ID.ToString();
+
+                }
+
+            }
+            else 
+            {
+                HF_EU.Value = "0";
+            }
+            
         }
 
         public ModuleActionCollection ModuleActions
@@ -97,20 +132,54 @@ namespace Christoc.Modules.Clientes
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            Data2.Class.Struct_Cliente CL = new Data2.Class.Struct_Cliente(
-                txt_razonsocial.Text,
-                txt_dnicuilcuit.Text,
-                cmbpais.SelectedValue,
-                cmbprovincia.SelectedValue,
-                txt_localidad.Text,
-                txt_domicilio.Text,
-                txt_observaciones.Text,
-                cmbsituacion.SelectedValue,
-                Data2.Statics.Conversion.GetDecimal(txt_descuento.Text),
-                txt_email.Text,
-                UserId);
-            CL.Guardar();
-                
+
+            if (Session[KeyIDC] == null)
+            {
+
+                Data2.Class.Struct_Cliente CL = new Data2.Class.Struct_Cliente(
+                    txt_razonsocial.Text,
+                    txt_dnicuilcuit.Text,
+                    cmbpais.SelectedValue,
+                    cmbprovincia.SelectedValue,
+                    txt_localidad.Text,
+                    txt_domicilio.Text,
+                    txt_observaciones.Text,
+                    cmbsituacion.SelectedValue,
+                    Data2.Statics.Conversion.GetDecimal(txt_descuento.Text),
+                    txt_email.Text,
+                    UserId,
+                    Data2.Statics.Conversion.GetDecimal(txt_limite.Text),
+                    chk_Suspendida.Checked);
+                CL.Guardar();
+            }
+            else 
+            {
+                Data2.Class.Struct_Cliente SC = Data2.Class.Struct_Cliente.GetClient(int.Parse(Session[KeyIDC].ToString()), UserId);
+                if (SC != null && Request[KeyIDC] != null)
+                {
+                    SC.DESCUENTO = Data2.Statics.Conversion.GetDecimal(txt_descuento.Text);
+                    SC.DNI = txt_dnicuilcuit.Text;
+                    SC.DOMICILIO = txt_domicilio.Text;
+                    SC.EMAIL = txt_domicilio.Text;
+                    SC.LIMITEDECREDITO = Data2.Statics.Conversion.GetDecimal(txt_limite.Text);
+                    SC.LOCALIDAD = txt_localidad.Text;
+                    SC.OBSERVACIONES = txt_observaciones.Text;
+                    SC.PAIS = cmbpais.SelectedValue;
+                    SC.PROVINCIA = cmbprovincia.SelectedValue;
+                    SC.RS = txt_razonsocial.Text;
+                    SC.TIPOIVA = cmbsituacion.SelectedValue;
+                    SC.Guardar();
+                    Session.Remove(KeyIDC);
+                    Response.Redirect(Request.RawUrl.Split('?')[0]);
+                }
+                else 
+                {
+                    Session.Remove(KeyIDC);
+                    HF_EU.Value = "0";
+                    Response.Redirect(Request.RawUrl.Split('?')[0]);
+
+                }
+            }
 
         }
     }
