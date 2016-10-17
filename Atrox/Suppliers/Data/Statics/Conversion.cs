@@ -17,6 +17,13 @@ namespace Data2.Statics
             return JSS.Serialize((T)MyList);
         }
 
+        public static string GetJasonFromObject<t>(object MyObject) 
+        {
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            StringBuilder SB = new StringBuilder();
+            return JSS.Serialize((t)MyObject);
+        }
+
         public static string DateTimeToSql(DateTime p_D) 
         {
             string d = p_D.Year + "-" + p_D.Month +"-" + p_D.Day + " " + p_D.Hour + ":" + p_D.Minute + ":" + p_D.Second;

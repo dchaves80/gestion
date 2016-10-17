@@ -36,6 +36,20 @@ namespace Data2.Connection
             }
         }
 
+        public static bool InsertDetalleCliente(int IdCliente, String tipoMovimiento, Decimal Importe, int IdFactura) 
+        {
+            GestionDataSetTableAdapters.QueriesTableAdapter QTA = new GestionDataSetTableAdapters.QueriesTableAdapter();
+            int Cant = QTA.Insert_MovimientoCliente(IdCliente, tipoMovimiento, Importe, IdFactura, Statics.Conversion.DateTimeToSql(DateTime.Now));
+            if (Cant > 0)
+            {
+                return true;
+            }
+            else 
+            {
+                return false;
+            }
+        }
+
         public DataTable Search_Cliente(string searchstring, int IDUSER) 
         {
             GestionDataSetTableAdapters.Search_Cliente_BeginTableAdapter TA = new GestionDataSetTableAdapters.Search_Cliente_BeginTableAdapter();

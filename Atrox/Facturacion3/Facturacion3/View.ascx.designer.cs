@@ -121,6 +121,24 @@ namespace Christoc.Modules.Facturacion3 {
         protected global::System.Web.UI.WebControls.DropDownList cmbFormaPago;
         
         /// <summary>
+        /// txtBusquedaCliente control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBusquedaCliente;
+        
+        /// <summary>
+        /// btnBuscarCliente control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnBuscarCliente;
+        
+        /// <summary>
         /// VisualizadorFactura control.
         /// </summary>
         /// <remarks>
@@ -272,5 +290,14 @@ namespace Christoc.Modules.Facturacion3 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField erasef;
+        
+        /// <summary>
+        /// IdCliente control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField IdCliente;
     }
 }

@@ -77,6 +77,18 @@
                 <asp:ListItem Text="Cuenta Corriente" Value="CC"></asp:ListItem>
             </asp:DropDownList>
         </div>
+        <div style="background-color:#78cc96;margin-top:10px;margin-bottom:10px" id="DivBusquedaCliente">
+            <span class="FormLabel" style="font-size:15px">Busqueda de Cliente</span>
+            <div>
+                <span class="FormLabel">Buscar:</span>
+                <asp:TextBox runat="server" CssClass="AtroxTextBox" ID="txtBusquedaCliente" ClientIDMode="Static"></asp:TextBox>
+                <asp:Button Text="Buscar Cliente" runat="server" ID="btnBuscarCliente" CssClass="FormButton FirstElement LastElement" OnClientClick="SearchClient(); return false;"/>
+            </div>
+            <span class="FormLabel">Selecciona Cliente:</span>
+            <select id="ClientsId">
+
+            </select>
+        </div>
 
         <div runat="server" id="VisualizadorFactura">
             <table style="width: 100%" id="mytable">
@@ -104,7 +116,7 @@
             <asp:DropDownList ID="cmbVendedor" runat="server" ClientIDMode="Static">
             </asp:DropDownList>
         </div>
-        <asp:Button Text="Aceptar Venta" runat="server" ID="btn_AceptarVenta" CssClass="FormButton FirstElement LastElement" OnClick="btn_AceptarVenta_Click" />
+        <asp:Button Text="Aceptar Venta" runat="server" ID="btn_AceptarVenta" CssClass="FormButton FirstElement LastElement" OnClientClick="AceptarVenta()" OnClick="btn_AceptarVenta_Click" />
         <div>
 
             <asp:Button Text="Cancelar Venta" runat="server" ID="btn_CancelarVenta" CssClass="FormButton FirstElement LastElement" OnClick="btn_CancelarVenta_Click" OnClientClick="CancelarVenta()"></asp:Button>
@@ -151,7 +163,22 @@
 <asp:HiddenField runat="server" ID="cantidades" ClientIDMode="Static" />
 <asp:HiddenField runat="server" ID="mykeys" ClientIDMode="Static" />
 <asp:HiddenField runat="server" ID="erasef" ClientIDMode="Static" />
+<asp:HiddenField runat="server" ID="IdCliente" ClientIDMode="Static" />
 <script>
+
+    function AceptarVenta()
+    {
+        if (Cookies.get('cookie_idcliente') != undefined) {
+            var MCID = Cookies.get('cookie_idcliente');
+            $("#IdCliente").val(MCID);
+
+        } else
+        {
+            $("IdCliente").val("0");
+        }
+
+        
+    }
 
     function NewFactura() {
         Cookies.set('cookie_condicioniva', 'E');
@@ -163,10 +190,14 @@
         Cookies.set('cookie_CUIT', '');
         Cookies.set('cookie_vendedor', '0');
         Cookies.set('cookie_formapago', 'C');
+        Cookies.set('cookie_idcliente', '0');
+        $("#IdCliente").val("0");
 
     }
 
-    var _TIPODEFACTURA =
+    var _TIPODEFACTURA;
+    $("#DivBusquedaCliente").hide();
+   
 
     function SimboloDecimal(value) {
         var decimalseparator = '';
@@ -183,17 +214,20 @@
 
 
     function fixSymbol(value) {
-        var decimalseparator = '';
-        var t = (1 / 2).toString();
-        if (t.indexOf(".") >= 0) {
-            decimalseparator = ".";
-        } else {
-            decimalseparator = ",";
-        }
-        var process1 = value.replace('.', decimalseparator);
-        var process2 = value.replace(',', decimalseparator);
-        return parseFloat(process2);
 
+        if (value != undefined) {
+
+            var decimalseparator = '';
+            var t = (1 / 2).toString();
+            if (t.indexOf(".") >= 0) {
+                decimalseparator = ".";
+            } else {
+                decimalseparator = ",";
+            }
+            var process1 = value.replace('.', decimalseparator);
+            var process2 = value.replace(',', decimalseparator);
+            return parseFloat(process2);
+        }
 
     }
 
@@ -261,6 +295,20 @@
 
     $('#txt_CUIT').keyup(function (event) {
         Cookies.set("cookie_CUIT", $('#txt_CUIT').val());
+    });
+
+    $("#cmbFormaPago").change(function () {
+        if ($("#cmbFormaPago").val() == "CC") {
+            $("#DivBusquedaCliente").show();
+            Cookies.set("cookie_idcliente", $("#ClientsId").val())
+        } else {
+            Cookies.set("cookie_idcliente", "0");
+            $("#DivBusquedaCliente").hide();
+        }
+    });
+
+    $("#ClientsId").change(function () {
+            Cookies.set("cookie_idcliente", $("#ClientsId").val())
     });
 
 
@@ -374,6 +422,82 @@
 
     }
 
+    function FillComboBoxCustomers(DATA)
+    {
+        Cookies.set("cookie_idcliente", "0");
+        Clientes = JSON.parse(DATA);
+        for (a = 0; a < Clientes.length; a++)
+        {
+            if (a==0)
+            {
+                Cookies.set("cookie_idcliente",Clientes[a].ID.toString());
+            }
+            
+            $("#ClientsId").append("<option value='" + Clientes[a].ID + "'>" + Clientes[a].RS + "(" + Clientes[a].DNI + ")" + "</option>");
+
+        }
+    }
+
+    function FillComboBoxSingleCustomer(DATA) {
+        Cookies.set("cookie_idcliente", "0");
+        Cliente = JSON.parse(DATA);
+        
+                Cookies.set("cookie_idcliente", Cliente.ID.toString());
+        
+
+                $("#ClientsId").append("<option value='" + Cliente.ID + "'>" + Cliente.RS + "(" + Cliente.DNI + ")" + "</option>");
+        
+
+        
+    }
+
+    
+
+    function SearchSingleClient()
+    {
+        $.ajax(
+            {
+                url: $('#baseurl').val() + '/DesktopModules/Clientes/API/ModuleTask/SSC',
+                data: { k: MyKey, rnd: 100, idc: Cookies.get('cookie_idcliente') },
+                datatype: 'json',
+                method: 'GET',
+                success: function (data)
+                {
+                    $("#ClientsId").find("option").remove();
+                    Clientes = JSON.parse(data);
+                    FillComboBoxSingleCustomer(data);
+                },
+                error: function ()
+                {
+                   
+                }
+            });
+    }
+
+    function SearchClient()
+    {
+        $.ajax(
+            {
+                url: $('#baseurl').val() + '/DesktopModules/Clientes/API/ModuleTask/SC',
+                data: { k: MyKey, rnd: 100, ss: $("#txtBusquedaCliente").val() },
+                dataType: 'json',
+                method: 'GET',
+                success: function (data)
+                {
+                    $("#ClientsId").find("option").remove();
+                    Clientes = JSON.parse(data);
+                    FillComboBoxCustomers(data);
+                    //Todo bien
+
+                },
+                error: function ()
+                {
+                    //error
+                }
+
+            });
+    }
+
     function search(searchChain) {
         $.ajax({
             url: $('#baseurl').val() + '/DesktopModules/Facturacion3/API/ModuleTask/SA',
@@ -461,7 +585,24 @@
 
     if (Cookies.get('cookie_formapago') != undefined) {
         $('#cmbFormaPago').val(Cookies.get('cookie_formapago'));
+        if ($('#cmbFormaPago').val() == "CC") {
+            $("#DivBusquedaCliente").show();
+            if (Cookies.get('cookie_idcliente') != undefined) {
+                SearchSingleClient();
+                $('#ClientsId').val(Cookies.get('cookie_idcliente'));
+            }
+        } else
+        {
+            $("#DivBusquedaCliente").hide();
+        }
+        
     }
+
+
+   
+
+
+
 
     if (Cookies.get('cookie_condicioniva') != undefined) {
         if (Cookies.get('cookie_tipodefactura') == 'A') {
@@ -495,6 +636,9 @@
         Cookies.remove('cookie_CUIT');
         Cookies.remove('cookie_vendedor');
         Cookies.remove('cookie_formapago');
+        Cookies.remove('cookie_idcliente');
+        
+        
 
     }
     if ($('#erasef').val() != undefined && $('#erasef').val() == '1') {

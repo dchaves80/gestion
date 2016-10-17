@@ -531,14 +531,19 @@ namespace Christoc.Modules.Facturacion3
             {
                 case "C":
                     F.Pago = Struct_Factura.CondicionPago.Contado;
+                    //Control para que no se filtre IdCliente
+                    IdCliente.Value = "0";
                     break;
                 case "CC":
                     F.Pago = Struct_Factura.CondicionPago.CtaCte;
                     break;
             }
 
-            F.GuardarFactura(int.Parse(cmbVendedor.SelectedValue.ToString()));
-            Session.Remove(key_session_factura);
+            F.GuardarFactura(int.Parse(cmbVendedor.SelectedValue.ToString()),int.Parse(IdCliente.Value));
+            
+           
+            
+                Session.Remove(key_session_factura);
             erasef.Value = "1";
             
             

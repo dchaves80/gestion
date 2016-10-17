@@ -16,9 +16,43 @@ namespace Christoc.Modules.Clientes
 
     public class ModuleTaskController : DnnApiController
     {
+
+        [AllowAnonymous]
+        [HttpGet]
+        public HttpResponseMessage SSC(string K, int idc)
+        {
+
+            Data2.Connection.D_StaticWebService SWS = new Data2.Connection.D_StaticWebService();
+            int iduser = SWS.GetUserByPrivateKey(K);
+            if (iduser != 0)
+            {
+                Data2.Class.Struct_Cliente  MyClient = Data2.Class.Struct_Cliente.GetClient(idc, iduser);
+                if (MyClient != null)
+                {
+                    string R = Data2.Statics.Conversion.GetJasonFromObject<Data2.Class.Struct_Cliente>(MyClient);
+                    return Request.CreateResponse(HttpStatusCode.OK, R);
+
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, "null");
+                }
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, "null");
+            }
+
+
+            
+
+        }
+
         [AllowAnonymous]
         [HttpGet]
 
+        
+        
 
         public HttpResponseMessage SC(string K, string ss)
         {

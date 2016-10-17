@@ -28,6 +28,7 @@ namespace Data2.Class
             public decimal LIMITEDECREDITO;
             public bool SUSPENDIDA;
 
+                
 
             public static Struct_Cliente GetClient(int IdCliente, int IdUser) 
             {
@@ -58,6 +59,12 @@ namespace Data2.Class
                     return null;
                 }
 
+
+            }
+
+            public bool InsertDetail(Struct_Factura F) 
+            {
+                return Connection.D_Clientes.InsertDetalleCliente(ID, "F", 0, F.Id);
 
             }
 

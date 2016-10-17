@@ -118,7 +118,7 @@ namespace Data2.Class
             }
         }
 
-        public bool GuardarFactura(int p_IdVendedor) 
+        public bool GuardarFactura(int p_IdVendedor, int Cliente = 0) 
         {
             Connection.D_Factura F = new Connection.D_Factura();
 
@@ -128,6 +128,14 @@ namespace Data2.Class
             bool Exento = false;
             bool ConsumidorFinal = false; 
             bool RespMonotributo = false;
+           // A CC
+            Struct_Cliente SC = null;
+            if (Cliente != 0) 
+            {
+                SC = Struct_Cliente.GetClient(Cliente, UserId);
+            }
+            // FIN A CC
+
 
             if (Condicion_IVA==CondicionIVA.RespInscripto) RespInscripto = true;
             if (Condicion_IVA==CondicionIVA.RespNoInscripto) RespNoInscripto = true;
@@ -151,6 +159,10 @@ namespace Data2.Class
                     Id = IdFactura;
                     F.InsertarDetalleFactura(this);
                     SetVendedor(p_IdVendedor);
+                    if (SC!=null)
+                    {
+                        SC.InsertDetail(this);
+                    }
                     return true;
                 }
                 else
@@ -167,6 +179,10 @@ namespace Data2.Class
                     Id = IdFactura;
                     F.InsertarDetalleFactura(this);
                     SetVendedor(p_IdVendedor);
+                    if (SC != null)
+                    {
+                        SC.InsertDetail(this);
+                    }
                     return true;
                 }
                 else
@@ -183,6 +199,10 @@ namespace Data2.Class
                     Id = IdFactura;
                     F.InsertarDetalleFactura(this);
                     SetVendedor(p_IdVendedor);
+                    if (SC != null)
+                    {
+                        SC.InsertDetail(this);
+                    }
                     return true;
                 }
                 else
@@ -194,6 +214,8 @@ namespace Data2.Class
             {
                 return false;
             }
+
+            
            
         }
 
