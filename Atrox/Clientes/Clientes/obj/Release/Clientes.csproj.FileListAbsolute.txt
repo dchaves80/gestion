@@ -2,3 +2,4 @@ C:\DNN\DesktopModules\Atrox\bin\Clientes.dll
 C:\DNN\DesktopModules\Atrox\bin\Clientes.pdb
 C:\DNN\DesktopModules\Atrox\Clientes\Clientes\obj\Release\Clientes.dll
 C:\DNN\DesktopModules\Atrox\Clientes\Clientes\obj\Release\Clientes.pdb
+C:\DNN\DesktopModules\Atrox\Clientes\Clientes\obj\Release\Clientes.csprojResolveAssemblyReference.cache

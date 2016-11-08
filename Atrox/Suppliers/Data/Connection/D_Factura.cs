@@ -29,19 +29,40 @@ namespace Data2.Connection
 
         public void InsertarDetalleFactura(Class.Struct_Factura p_F) 
         {
-            for (int a = 0; a < p_F.GetDetalle().Count; a++) 
+            if (p_F.FacturaTipo != Class.Struct_Factura.TipoDeFactura.Presupuesto)
             {
-                GestionDataSetTableAdapters.QueriesTableAdapter QTA = new GestionDataSetTableAdapters.QueriesTableAdapter();
-                QTA.Insert_DetalleFactura(
-                    p_F.Id, 
-                    p_F.GetDetalle()[a].PRODUCTO.Id, 
-                    p_F.GetDetalle()[a].PRODUCTO.PrecioNeto, 
-                    p_F.GetDetalle()[a].PRODUCTO.IVA, 
-                    p_F.GetDetalle()[a].PRODUCTO.PrecioCompra, 
-                    p_F.GetDetalle()[a].PRODUCTO.PorcentajeGanancia, 
-                    p_F.GetDetalle()[a].PRODUCTO.PrecioFinal, 
-                    p_F.GetDetalle()[a].DETALLEINT, 
-                    p_F.GetDetalle()[a].DETALLEDEC);
+
+                for (int a = 0; a < p_F.GetDetalle().Count; a++)
+                {
+                    GestionDataSetTableAdapters.QueriesTableAdapter QTA = new GestionDataSetTableAdapters.QueriesTableAdapter();
+                    QTA.Insert_DetalleFactura(
+                        p_F.Id,
+                        p_F.GetDetalle()[a].PRODUCTO.Id,
+                        p_F.GetDetalle()[a].PRODUCTO.PrecioNeto,
+                        p_F.GetDetalle()[a].PRODUCTO.IVA,
+                        p_F.GetDetalle()[a].PRODUCTO.PrecioCompra,
+                        p_F.GetDetalle()[a].PRODUCTO.PorcentajeGanancia,
+                        p_F.GetDetalle()[a].PRODUCTO.PrecioFinal,
+                        p_F.GetDetalle()[a].DETALLEINT,
+                        p_F.GetDetalle()[a].DETALLEDEC);
+                }
+            }
+            else
+            {
+                for (int a = 0; a < p_F.GetDetalle().Count; a++)
+                {
+                    GestionDataSetTableAdapters.QueriesTableAdapter QTA = new GestionDataSetTableAdapters.QueriesTableAdapter();
+                    QTA.Insert_DetallePresupuesto(
+                        p_F.Id,
+                        p_F.GetDetalle()[a].PRODUCTO.Id,
+                        p_F.GetDetalle()[a].PRODUCTO.PrecioNeto,
+                        p_F.GetDetalle()[a].PRODUCTO.IVA,
+                        p_F.GetDetalle()[a].PRODUCTO.PrecioCompra,
+                        p_F.GetDetalle()[a].PRODUCTO.PorcentajeGanancia,
+                        p_F.GetDetalle()[a].PRODUCTO.PrecioFinal,
+                        p_F.GetDetalle()[a].DETALLEINT,
+                        p_F.GetDetalle()[a].DETALLEDEC);
+                }
             }
         }
 

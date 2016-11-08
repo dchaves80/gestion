@@ -10,6 +10,8 @@
                 <asp:ListItem Text="Factura A" Value="A"></asp:ListItem>
                 <asp:ListItem Text="Factura B" Value="B" Selected="True"></asp:ListItem>
                 <asp:ListItem Text="Factura C" Value="C"></asp:ListItem>
+                <asp:ListItem Text="Factura X" Value="X"></asp:ListItem>
+                <asp:ListItem Text="Presupuesto" Value="P"></asp:ListItem>
             </asp:DropDownList>
         </div>
         <div runat="server" id="ControlesFacturaA">
@@ -123,6 +125,7 @@
 
         </div>
     </div>
+    <div id="messagebox" runat="server"></div>
 </div>
 
 
@@ -641,11 +644,18 @@
         
 
     }
+
+    function redirect()
+    {
+        window.location.href = url;
+    }
+
     if ($('#erasef').val() != undefined && $('#erasef').val() == '1') {
         CancelarVenta();
         var url = $('#url').val();
-        window.location.href = url;
-
+        $("#controlesFactura").hide();
+        setTimeout(redirect, 3000);
+       
     }
 
 </script>

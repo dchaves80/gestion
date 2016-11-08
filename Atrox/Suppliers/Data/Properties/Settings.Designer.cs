@@ -25,28 +25,6 @@ namespace Data2.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=IRMA-PC\\SQLCLOVERFIELD;Initial Catalog=Gestion;User ID=sa;Password=cl" +
-            "overfield161185")]
-        public string GestionConnectionStringLOCAL {
-            get {
-                return ((string)(this["GestionConnectionStringLOCAL"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=managerdenegocios.com;Initial Catalog=GestionSystem;User ID=UserGesti" +
-            "on;Password=Sealab2021!")]
-        public string GestionConnectionStringREMOTE {
-            get {
-                return ((string)(this["GestionConnectionStringREMOTE"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("asd\r\n")]
         public string Setting {
             get {
@@ -62,6 +40,28 @@ namespace Data2.Properties {
         public string GestionConnectionString {
             get {
                 return ((string)(this["GestionConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=IRMA-PC\\SQLCLOVERFIELD;Initial Catalog=Gestion;User ID=sa;Password=cl" +
+            "overfield161185")]
+        public string GestionConnectionString_LOCAL_ {
+            get {
+                return ((string)(this["GestionConnectionString_LOCAL_"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=IRMA-PC\\SQLCLOVERFIELD;Initial Catalog=Gestion;User ID=sa;Password=cl" +
+            "overfield161185")]
+        public string GestionConnectionString_REMOTE_ {
+            get {
+                return ((string)(this["GestionConnectionString_REMOTE_"]));
             }
         }
     }

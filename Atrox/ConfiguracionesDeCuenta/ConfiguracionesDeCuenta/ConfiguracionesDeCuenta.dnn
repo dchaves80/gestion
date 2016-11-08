@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="ConfiguracionesDeCuenta" type="Module" version="04.00.00">
+    <package name="ConfiguracionesDeCuenta" type="Module" version="05.00.00">
       <friendlyName>ConfiguracionesDeCuenta</friendlyName>
       <description>Christoc.com ConfiguracionesDeCuenta module</description>
       <iconFile>Images/icon_extensions.gif</iconFile>

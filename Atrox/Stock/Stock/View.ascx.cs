@@ -271,10 +271,13 @@ namespace Christoc.Modules.Stock
 
                     if (UnitsList != null && UnitsList.Count > 0)
                     {
+                        
                         HtmlGenericControl ListBox = new HtmlGenericControl("select");
                         ListBox.Attributes.Add("ID", "SL" + a.ToString());
+                        int hi = 0;
                         for (int b = 0; b < UnitsList.Count; b++) 
                         {
+                            hi = b;
                             HtmlGenericControl OPT = new HtmlGenericControl("option");
                             OPT.Attributes.Add("value", UnitsList[b].Id.ToString());
                             

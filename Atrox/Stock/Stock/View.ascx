@@ -25,6 +25,7 @@
 <div id="DivMessage" runat="server">
     
 </div>
+<div runat="server" id="cool01"></div>
 <asp:HiddenField id="KEY" runat="server" ClientIDMode="Static" Value="" ></asp:HiddenField>
 <script>
     var PanelBusquedaAvanzada = $("#BusquedaAvanzada");

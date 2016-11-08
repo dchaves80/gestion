@@ -179,6 +179,8 @@ namespace Christoc.Modules.ListadoFacturas
                 int _FA = 0;
                 int _FB = 0;
                 int _FC = 0;
+                int _FX = 0;
+                int _FP = 0;
                 for (int a = 0; a < _LF.Count; a++)
                 {
                     switch (_LF[a].FacturaTipo)
@@ -192,10 +194,16 @@ namespace Christoc.Modules.ListadoFacturas
                         case Struct_Factura.TipoDeFactura.FacturaC:
                             _FC++;
                             break;
+                        case Struct_Factura.TipoDeFactura.FacturaX:
+                            _FX++;
+                            break;
+                        case Struct_Factura.TipoDeFactura.Presupuesto:
+                            _FP++;
+                            break;
                     }
                 }
 
-                HF_DataCant.Value = _FA.ToString() + "," + _FB.ToString() + "," + _FC.ToString();
+                HF_DataCant.Value = _FA.ToString() + "," + _FB.ToString() + "," + _FC.ToString() + "," + _FX.ToString() + "," + _FP.ToString();
 
                 HF_DataTitle.Value = "Facturas periodo:" + _LF[0].Fecha.ToShortDateString() + "-" + _LF[_LF.Count - 1].Fecha.ToShortDateString();
             }
@@ -249,6 +257,8 @@ namespace Christoc.Modules.ListadoFacturas
                     if (F.FacturaTipo == Struct_Factura.TipoDeFactura.FacturaA) facturatipo = "A";
                     if (F.FacturaTipo == Struct_Factura.TipoDeFactura.FacturaB) facturatipo = "B";
                     if (F.FacturaTipo == Struct_Factura.TipoDeFactura.FacturaC) facturatipo = "C";
+                    if (F.FacturaTipo == Struct_Factura.TipoDeFactura.FacturaX) facturatipo = "X";
+                    if (F.FacturaTipo == Struct_Factura.TipoDeFactura.Presupuesto) facturatipo = "P";
                     Letter.Attributes.Add("Class", "LetraFactura");
                     string total = F.total.ToString("#.00");
                     string[] splitters = { ".", "," };
@@ -315,6 +325,9 @@ namespace Christoc.Modules.ListadoFacturas
             if (cmb_TipoComprobante.SelectedValue=="A") TF = Data2.Class.Struct_Factura.TipoDeFactura.FacturaA;
             if (cmb_TipoComprobante.SelectedValue=="B") TF = Data2.Class.Struct_Factura.TipoDeFactura.FacturaB;
             if (cmb_TipoComprobante.SelectedValue == "C") TF = Data2.Class.Struct_Factura.TipoDeFactura.FacturaC;
+            if (cmb_TipoComprobante.SelectedValue == "X") TF = Data2.Class.Struct_Factura.TipoDeFactura.FacturaX;
+            if (cmb_TipoComprobante.SelectedValue == "P") TF = Data2.Class.Struct_Factura.TipoDeFactura.Presupuesto;
+            
             
 
             List<Data2.Class.Struct_Factura> _LF = Data2.Class.Struct_Factura.GetFacturasBetweenDates(Start, End, UserId, false, TF);

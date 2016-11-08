@@ -495,6 +495,12 @@ namespace Christoc.Modules.Facturacion3
                 case "C":
                     F.setFacturaTipo(Struct_Factura.TipoDeFactura.FacturaC);
                     break;
+                case "X":
+                    F.setFacturaTipo(Struct_Factura.TipoDeFactura.FacturaX);
+                    break;
+                case "P":
+                    F.setFacturaTipo(Struct_Factura.TipoDeFactura.Presupuesto);
+                    break;
 
             }
 
@@ -538,8 +544,20 @@ namespace Christoc.Modules.Facturacion3
                     F.Pago = Struct_Factura.CondicionPago.CtaCte;
                     break;
             }
+            bool succes = false;
+            succes = F.GuardarFactura(int.Parse(cmbVendedor.SelectedValue.ToString()),int.Parse(IdCliente.Value));
+            messagebox.Attributes.Clear();
 
-            F.GuardarFactura(int.Parse(cmbVendedor.SelectedValue.ToString()),int.Parse(IdCliente.Value));
+            if (succes) 
+            {
+                messagebox.Attributes.Add("class", "MessageBox MessageSuccess");
+                messagebox.InnerText = "Comprobante registrado en el sistema y pendiente de aprobación";
+            } 
+            else 
+            {
+                messagebox.Attributes.Add("class", "MessageBox MessageError");
+                messagebox.InnerText = "Error al registrar comprobante";
+            }
             
            
             

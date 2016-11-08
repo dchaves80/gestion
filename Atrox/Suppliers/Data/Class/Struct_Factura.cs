@@ -14,7 +14,7 @@ namespace Data2.Class
     public class Struct_Factura
     {
 
-        public enum TipoDeFactura { Null ,FacturaA, FacturaB, FacturaC};
+        public enum TipoDeFactura { Null ,FacturaA, FacturaB, FacturaC, Presupuesto, FacturaX};
         public enum CondicionIVA { RespInscripto, RespNoInscripto, Exento, ConsumidorFinal, RespMonotributo }
         public enum CondicionPago { Contado, CtaCte }
         
@@ -120,6 +120,11 @@ namespace Data2.Class
 
         public bool GuardarFactura(int p_IdVendedor, int Cliente = 0) 
         {
+            if (MiDetalle == null || MiDetalle.Count == 0) 
+            {
+                return false;
+            }
+
             Connection.D_Factura F = new Connection.D_Factura();
 
             
@@ -149,6 +154,7 @@ namespace Data2.Class
             if (Pago==CondicionPago.Contado) Contado=true;
             if (Pago==CondicionPago.CtaCte) CtaCte=true;
 
+            
 
             if (FacturaTipo == TipoDeFactura.FacturaA)
             {
@@ -210,7 +216,47 @@ namespace Data2.Class
                     return false;
                 }
             }
-            else 
+            else if (FacturaTipo == TipoDeFactura.FacturaX)
+            {
+                int IdFactura = F.InsertFactura(UserId, "", "", DateTime.Now, "X", senores, domicilio, telefono, localidad, cuit, RespInscripto, RespNoInscripto, Exento, ConsumidorFinal, RespMonotributo, Contado, CtaCte, 0, false, "", false, 0, "", Observaciones, GetTotalSinIva(), true, GetTotalConIvaIncluido());
+
+                if (IdFactura != 0)
+                {
+                    Id = IdFactura;
+                    F.InsertarDetalleFactura(this);
+                    SetVendedor(p_IdVendedor);
+                    if (SC != null)
+                    {
+                        SC.InsertDetail(this);
+                    }
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else if (FacturaTipo == TipoDeFactura.Presupuesto)
+            {
+                int IdFactura = F.InsertFactura(UserId, "", "", DateTime.Now, "P", senores, domicilio, telefono, localidad, cuit, RespInscripto, RespNoInscripto, Exento, ConsumidorFinal, RespMonotributo, Contado, CtaCte, 0, false, "", false, 0, "", Observaciones, GetTotalSinIva(), true, GetTotalConIvaIncluido());
+
+                if (IdFactura != 0)
+                {
+                    Id = IdFactura;
+                    F.InsertarDetalleFactura(this);
+                    SetVendedor(p_IdVendedor);
+                    if (SC != null)
+                    {
+                        SC.InsertDetail(this);
+                    }
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else  
             {
                 return false;
             }
@@ -293,6 +339,8 @@ namespace Data2.Class
                 case TipoDeFactura.FacturaA: T="A";break;
                 case TipoDeFactura.FacturaB: T="B";break;
                 case TipoDeFactura.FacturaC: T="C";break;
+                case TipoDeFactura.FacturaX: T = "X"; break;
+                case TipoDeFactura.Presupuesto: T = "P"; break;
                 default: T = "0"; break;
             }
             Data2.Connection.D_Factura Conn = new Connection.D_Factura();
@@ -328,6 +376,8 @@ namespace Data2.Class
                 case "A": FacturaTipo=TipoDeFactura.FacturaA;break;
                 case "B" :FacturaTipo=TipoDeFactura.FacturaB;break;
                 case "C" :FacturaTipo=TipoDeFactura.FacturaC;break;
+                case "X": FacturaTipo = TipoDeFactura.FacturaX; break;
+                case "P": FacturaTipo = TipoDeFactura.Presupuesto; break;
             }
             senores = dr["Nombre"].ToString();
             domicilio = dr["Domicilio"].ToString();
