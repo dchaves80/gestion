@@ -1,0 +1,5 @@
+C:\DNN\DesktopModules\Atrox\bin\Remitos.dll
+C:\DNN\DesktopModules\Atrox\bin\Remitos.pdb
+C:\DNN\DesktopModules\Atrox\Remitos\Remitos\obj\Release\Remitos.dll
+C:\DNN\DesktopModules\Atrox\Remitos\Remitos\obj\Release\Remitos.pdb
+C:\DNN\DesktopModules\Atrox\Remitos\Remitos\obj\Release\Remitos.csprojResolveAssemblyReference.cache

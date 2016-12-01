@@ -52,9 +52,11 @@
   <ItemGroup>
     <Compile Include="Class\Struct_Cliente.cs" />
     <Compile Include="Class\Struct_DetalleFactura.cs" />
+    <Compile Include="Class\Struct_DetalleRemito.cs" />
     <Compile Include="Class\Struct_Factura.cs" />
     <Compile Include="Class\Struct_PrintConfiguration.cs" />
     <Compile Include="Class\Struct_Producto.cs" />
+    <Compile Include="Class\Struct_Remito.cs" />
     <Compile Include="Class\Struct_Supplier.cs" />
     <Compile Include="Class\Struct_TipoDocumento.cs" />
     <Compile Include="Class\Struct_CategoriaAFIP.cs" />
@@ -69,6 +71,7 @@
     <Compile Include="Connection\D_Clientes.cs" />
     <Compile Include="Connection\D_Factura.cs" />
     <Compile Include="Connection\D_PrinterConfig.cs" />
+    <Compile Include="Connection\D_Remito.cs" />
     <Compile Include="Connection\D_StaticWebService.cs" />
     <Compile Include="Connection\D_Supplier.cs" />
     <Compile Include="Connection\D_TipoDocumento.cs" />

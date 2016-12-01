@@ -35,8 +35,8 @@ namespace Data2.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=IRMA-PC\\SQLCLOVERFIELD;Initial Catalog=Gestion;User ID=sa;Password=cl" +
-            "overfield161185")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=managerdenegocios.com;Initial Catalog=GestionSystem;User ID=UserGesti" +
+            "on;Password=Sealab2021!")]
         public string GestionConnectionString {
             get {
                 return ((string)(this["GestionConnectionString"]));
@@ -46,8 +46,8 @@ namespace Data2.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=IRMA-PC\\SQLCLOVERFIELD;Initial Catalog=Gestion;User ID=sa;Password=cl" +
-            "overfield161185")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=managerdenegocios.com;Initial Catalog=GestionSystem;User ID=UserGesti" +
+            "on;Password=Sealab2021!")]
         public string GestionConnectionString_LOCAL_ {
             get {
                 return ((string)(this["GestionConnectionString_LOCAL_"]));
@@ -57,8 +57,8 @@ namespace Data2.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=IRMA-PC\\SQLCLOVERFIELD;Initial Catalog=Gestion;User ID=sa;Password=cl" +
-            "overfield161185")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=managerdenegocios.com;Initial Catalog=GestionSystem;User ID=UserGesti" +
+            "on;Password=Sealab2021!")]
         public string GestionConnectionString_REMOTE_ {
             get {
                 return ((string)(this["GestionConnectionString_REMOTE_"]));

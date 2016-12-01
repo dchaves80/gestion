@@ -8,6 +8,9 @@ using System.Web.UI.WebControls;
 
 namespace Data2.Class
 {
+
+
+
     public class Struct_DetalleFactura
     {
         public int DETALLEINT=0;

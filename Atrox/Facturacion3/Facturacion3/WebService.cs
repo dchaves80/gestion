@@ -19,7 +19,7 @@ namespace Christoc.Modules.Facturacion3
         [AllowAnonymous]
         [HttpGet]
 
-        public HttpResponseMessage SA(string K, string ss, string sc)
+        public HttpResponseMessage SA(string K, string ss, string sc, string ip="-1")
         {
 
 
@@ -31,8 +31,12 @@ namespace Christoc.Modules.Facturacion3
             if (sc == "cb") SC = Data2.Connection.D_Articles.SearchCondition.PorCodigoBarra;
             if (sc == "de") SC = Data2.Connection.D_Articles.SearchCondition.PorDescripcion;
 
-
-
+            int IdProvider = -1;
+            try
+            {
+                IdProvider = int.Parse(ip);
+            }
+            catch { IdProvider = -1; }
 
             Data2.Connection.D_StaticWebService SWS = new Data2.Connection.D_StaticWebService();
             int IdUser = SWS.GetUserByPrivateKey(K);
@@ -40,7 +44,7 @@ namespace Christoc.Modules.Facturacion3
             if (ss != null)
             {
 
-                List<Data2.Class.Struct_Producto> _List = Data2.Class.Struct_Producto.SearchProducto(IdUser, ss, SC);
+                List<Data2.Class.Struct_Producto> _List = Data2.Class.Struct_Producto.SearchProducto(IdUser, ss, SC,IdProvider);
 
                 if (_List != null && _List.Count>0)
                 {

@@ -310,9 +310,9 @@ namespace Data2.Class
 
         }
 
-        public static List<Struct_Producto> SearchProducto(int p_IdUser, string p_SearchString, Connection.D_Articles.SearchCondition p_SearchCondition) 
+        public static List<Struct_Producto> SearchProducto(int p_IdUser, string p_SearchString, Connection.D_Articles.SearchCondition p_SearchCondition, int IdProvider=-1) 
         {
-            DataTable DTResult = Connection.D_Articles.SearchArticle(p_IdUser, p_SearchString, p_SearchCondition);
+            DataTable DTResult = Connection.D_Articles.SearchArticle(p_IdUser, p_SearchString, p_SearchCondition,IdProvider);
 
             if (DTResult!=null && DTResult.Rows.Count > 0)
             {

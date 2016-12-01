@@ -28,7 +28,7 @@ namespace Data2.Connection
 
         public enum SearchCondition {PorDescripcion, PorCodigoInterno, PorCodigoBarra}
 
-        public static DataTable SearchArticle(int p_iduser, string p_searchstring, SearchCondition p_searchcondition) 
+        public static DataTable SearchArticle(int p_iduser, string p_searchstring, SearchCondition p_searchcondition, int IdProvider=-1) 
         {
             string strsearchcondition;
             switch (p_searchcondition) 
@@ -48,7 +48,7 @@ namespace Data2.Connection
             }
             GestionDataSetTableAdapters.SearchArticleTableAdapter TA = new GestionDataSetTableAdapters.SearchArticleTableAdapter();
             GestionDataSet.SearchArticleDataTable DT = new GestionDataSet.SearchArticleDataTable();
-            TA.Fill(DT, p_iduser, p_searchstring, strsearchcondition);
+            TA.Fill(DT, p_iduser, p_searchstring, strsearchcondition,IdProvider);
             if (DT.Rows.Count > 0)
             {
                 return DT;
