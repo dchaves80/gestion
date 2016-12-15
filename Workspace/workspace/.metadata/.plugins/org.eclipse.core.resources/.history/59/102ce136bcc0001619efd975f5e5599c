@@ -1,0 +1,15 @@
+package com.dchalarmas.monitoreo;
+
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+
+public class recibidor extends BroadcastReceiver {
+
+	@Override
+	public void onReceive(Context context, Intent intent) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

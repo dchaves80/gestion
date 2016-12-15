@@ -1,0 +1,5 @@
+package com.dchalarmas.monitore.clases;
+
+public class Cliente {
+
+}

@@ -1,0 +1,31 @@
+package com.dchalarmas.monitoreo;
+
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.widget.Toast;
+
+public class recibidor extends BroadcastReceiver {
+
+	@Override
+	public void onReceive(Context context, Intent intent) {
+		// TODO Auto-generated method stub
+		final android.telephony.SmsManager S = android.telephony.SmsManager.getDefault();
+		if (S!=null)
+		{
+			try {
+			
+			
+			Toast.makeText(context,"Mensaje recibido...", Toast.LENGTH_LONG).show();
+			} catch(Exception EXC)
+			{
+				EXC.getMessage();
+				
+			}
+			
+		}
+		
+
+	}
+
+}

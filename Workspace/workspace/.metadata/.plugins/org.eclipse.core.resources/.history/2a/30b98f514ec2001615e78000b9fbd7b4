@@ -1,0 +1,21 @@
+import java.io.IOException;
+import java.net.*;
+public class main {
+	public static void main(String[] args)
+	{
+		
+		System.out.println("Comenzando Servidor");
+		try {
+			ServerSocket SS = new ServerSocket(4000);
+			System.out.println("Socket Arriba");
+			Socket S = SS.accept();
+			 java.util.UUID.randomUUID();
+			System.out.println("Conectado...");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+}

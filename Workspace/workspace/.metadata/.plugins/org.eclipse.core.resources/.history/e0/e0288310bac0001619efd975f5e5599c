@@ -1,0 +1,31 @@
+package com.dchalarmas.monitoreo;
+
+import android.app.IntentService;
+import android.content.Intent;
+
+public class MainServiceMonitoreo extends IntentService {
+
+	
+
+
+
+
+
+	public MainServiceMonitoreo(String name) {
+		super(name);
+		// TODO Auto-generated constructor stub
+	}
+	@Override
+	public void onStart(Intent intent, int startId) {
+		// TODO Auto-generated method stub
+		super.onStart(intent, startId);
+	 recibidor r = new recibidor();
+	}
+
+	@Override
+	protected void onHandleIntent(Intent intent) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

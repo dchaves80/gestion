@@ -1,0 +1,17 @@
+import java.net.Socket;
+import java.util.UUID;
+
+public class Hilos extends Thread {
+	
+	UUID _UI;
+	Socket _MySocket;
+	
+	public void run(UUID MiUI, Socket MySocket) {
+		// TODO Auto-generated method stub
+		super.run();
+		_UI = MiUI;
+		_MySocket = MySocket;
+		
+	}
+
+}

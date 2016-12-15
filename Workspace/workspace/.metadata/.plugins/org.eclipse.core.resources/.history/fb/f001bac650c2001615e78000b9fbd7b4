@@ -1,0 +1,134 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.Socket;
+import java.net.SocketAddress;
+import java.util.UUID;
+
+public class Hilos extends Thread {
+	
+	UUID _UI;
+	Socket _MySocket;
+	public Socket _Socket;
+	public SocketAddress _SocketAddress;
+	public InputStream _InputStream;
+	public OutputStream _Outputstream;
+	
+	
+	public void start(UUID MiUI, Socket MySocket) {
+		// TODO Auto-generated method stub
+		super.start();
+		_UI = MiUI;
+		_MySocket = MySocket;
+		Enviar("La puta que te pario");
+		
+		
+	}
+	
+	private boolean IsAlive()
+	{
+		if (
+				_Socket!=null &&
+				_Socket.isConnected()==true &&
+				_Socket.isClosed()==false
+				)		
+		{
+			return true;
+			
+		} else 
+		{
+			return false;
+			
+		}
+		
+	}
+	
+	
+	private String getStringFromInputStream(InputStream is) {
+
+		BufferedReader br = null;
+		StringBuilder sb = new StringBuilder();
+
+		String line;
+		try {
+
+			br = new BufferedReader(new InputStreamReader(is));
+			while ((line = br.readLine()) != null) {
+				sb.append(line);
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		
+		return sb.toString();
+
+	}
+	
+	public String Recibir()
+	{
+		if (IsAlive()==true)
+		{
+			return getStringFromInputStream(_InputStream);
+					
+		} else 
+		{
+			return "";
+			
+		}
+		
+	}
+	
+	public boolean Enviar(String _sendString)
+	{
+		if (IsAlive())
+		{
+			try {
+				_Outputstream.write(_sendString.getBytes());
+				_Outputstream.flush();
+				return true;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				
+				e.printStackTrace();
+				return false;
+			}
+			
+		} else 
+		{
+			return false;
+			
+		}
+	}
+	
+		public boolean Connect(String IP, int PORT)
+		{
+					try {
+						
+						_Socket = new Socket(IP, PORT);
+						_InputStream = _Socket.getInputStream();
+						_Outputstream = _Socket.getOutputStream();
+						return true;
+						
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						return false;
+						
+					}	
+		}
+		
+	}
+
+
