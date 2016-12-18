@@ -27,13 +27,14 @@ namespace Data2.Class
         public bool MostrarLogoNegocio;
         public string FacturaPorDefecto;
         public string PIN;
+        public bool MostrarKiosco;
         
         public bool Guardar(int p_IdUser)
         {
             if (IdUser != 0 && Id != 0)
             {
                 Connection.D_UserConfig D = new Connection.D_UserConfig();
-                return D.Update_UserConfig(IdUser, NombreNegocio, MostrarLogoNegocio, FacturaPorDefecto, PIN);
+                return D.Update_UserConfig(IdUser, NombreNegocio, MostrarLogoNegocio, FacturaPorDefecto, PIN, MostrarKiosco);
 
 
             }
@@ -41,7 +42,7 @@ namespace Data2.Class
             {
                 Connection.D_UserConfig D = new Connection.D_UserConfig();
                 IdUser = p_IdUser;
-                return  D.Insert_UserConfig(IdUser, NombreNegocio, MostrarLogoNegocio, FacturaPorDefecto, PIN);
+                return  D.Insert_UserConfig(IdUser, NombreNegocio, MostrarLogoNegocio, FacturaPorDefecto, PIN, MostrarKiosco);
             }
         }
 
@@ -56,8 +57,10 @@ namespace Data2.Class
             IdUser = int.Parse(UC["IdUser"].ToString());
             NombreNegocio = UC["NombreNegocio"].ToString();
             MostrarLogoNegocio = Statics.Conversion.convertSQLToBoolean(UC["MostrarLogoNegocio"]);
+            MostrarKiosco = Statics.Conversion.convertSQLToBoolean(UC["Kiosco"]);
             FacturaPorDefecto = UC["FacturaPorDefecto"].ToString();
             PIN = UC["PIN"].ToString();
+
 
         }
 

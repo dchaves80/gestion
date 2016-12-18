@@ -77,6 +77,9 @@
         <div class="SubMenu2">
             <span class="FormLabel">¿ Mostrar Logo ?</span><asp:CheckBox Id="chk_MostrarLogoNegocio" runat="server"/>
         </div>
+        <div class="SubMenu2">
+            <span class="FormLabel">¿ Habilitar Conrtrol Kiosco ?</span><asp:CheckBox Id="chk_HabilitarKiosco" runat="server"/>
+        </div>
         <div>
             <asp:Button Text="Guardar" ID="btnGuardarConfigNegocio" runat="server" OnClick="btnGuardarConfigNegocio_Click" CssClass="FormButton FirstElement LastElement" /> 
             </div>

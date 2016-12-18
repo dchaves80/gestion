@@ -4,6 +4,15 @@
 
 
     <div id="controlesFactura" runat="server">
+        <div style="border-style:solid;border-width:1px;border-radius:3px 3px;padding-bottom:10px" runat="server" id="ModoRapido">
+           <div style="margin-left:10px;margin-top:10px; font-weight:bolder">MODO RAPIDO:</div> 
+            <div>
+                <span class="FormLabel">Cantidad:</span><asp:TextBox CssClass="AtroxTextBoxMount" runat="server" id="txt_MRcantidad" ClientIDMode="Static" />
+            </div>
+            <div>
+                <span class="FormLabel">Código de barra:</span><asp:TextBox CssClass="AtroxTextBox" runat="server" id="txt_MRcodigobarra" ClientIDMode="Static" />
+            </div>
+        </div>
         <div>
             <span class="FormLabel">Tipo de Factura</span>
             <asp:DropDownList runat="server" ID="Factura_Tipo" ClientIDMode="Static">
@@ -167,8 +176,36 @@
 <asp:HiddenField runat="server" ID="mykeys" ClientIDMode="Static" />
 <asp:HiddenField runat="server" ID="erasef" ClientIDMode="Static" />
 <asp:HiddenField runat="server" ID="IdCliente" ClientIDMode="Static" />
-<script>
+<asp:HiddenField runat="server" ID="HF_ModoRapido" ClientIDMode="Static" />
 
+<script>
+    var MRcode;
+    var MRcant;
+    function AddProduct() {
+        MRcode = $("#txt_MRcodigobarra").val();
+        MRcant = $("#txt_MRcantidad").val();
+        var url = $('#url').val();
+        window.location.href = url + "?addartcod=" + MRcode + "&cant=" + MRcant;
+    }
+
+    
+    $("#txt_MRcantidad").on('keyup', function (e) {
+        if (e.keyCode == 13) {
+            $("#txt_MRcodigobarra").focus();
+        }
+    });
+
+    $("#txt_MRcodigobarra").on('keyup', function (e) {
+        if (e.keyCode == 13) {
+            AddProduct();
+        }
+    });
+
+    if ($("#HF_ModoRapido").val() == "1")
+    {
+        $("#txt_MRcantidad").focus();
+    }
+    
     function AceptarVenta()
     {
         if (Cookies.get('cookie_idcliente') != undefined) {

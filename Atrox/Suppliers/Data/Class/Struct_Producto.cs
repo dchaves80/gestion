@@ -341,6 +341,19 @@ namespace Data2.Class
             }
         }
 
+        public static Struct_Producto Get_SingleArticle(int p_IdUser, string Codes)
+        {
+            DataRow DR = Connection.D_Articles.SelectSingleArticle(p_IdUser, Codes);
+            if (DR != null)
+            {
+                return DataRowToProduct(DR);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public static ProductDATASET Get_ArticleFORSTOCK(int p_IdUser, int p_IdProvider, string p_Code, string p_Name) 
         {
            DataTable DT =  Connection.D_Articles.SelectArticlesForStock(p_IdUser, p_IdProvider, p_Code, p_Name);

@@ -105,6 +105,7 @@ namespace Christoc.Modules.ConfiguracionesDeCuenta
                 MensajeConfigUsuario.Visible = false;
                 txt_NombreNegocio.Text = UC.NombreNegocio;
                 chk_MostrarLogoNegocio.Checked = UC.MostrarLogoNegocio;
+                chk_HabilitarKiosco.Checked = UC.MostrarKiosco;
                 for (int a = 0; a < cmb_FacturaPorDefecto.Items.Count; a++) 
                 {
                     if (cmb_FacturaPorDefecto.Items[a].Value == UC.FacturaPorDefecto) 
@@ -333,6 +334,7 @@ namespace Christoc.Modules.ConfiguracionesDeCuenta
             UC.NombreNegocio = txt_NombreNegocio.Text;
             UC.MostrarLogoNegocio = chk_MostrarLogoNegocio.Checked;
             UC.PIN = "";
+            UC.MostrarKiosco = chk_HabilitarKiosco.Checked;
             UC.Guardar(UserId);
 
         }

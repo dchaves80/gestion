@@ -74,6 +74,23 @@ namespace Data2.Class
             
         }
 
+        public Struct_DetalleFactura(string CodeProd, int IdUser)
+        {
+            PRODUCTO = Struct_Producto.Get_SingleArticle(IdUser, CodeProd);
+            Struct_Unidades _U = new Struct_Unidades(PRODUCTO.IdUnidad);
+            if (_U.Decimal == true)
+            {
+                isdec = true;
+            }
+            else
+            {
+                isdec = false;
+            }
+            InitAccessKey();
+
+
+        }
+
         private void InitAccessKey() 
         {
             Random R = new Random(DateTime.Now.Millisecond);

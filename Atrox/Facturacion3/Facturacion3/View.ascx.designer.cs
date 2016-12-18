@@ -31,6 +31,33 @@ namespace Christoc.Modules.Facturacion3 {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl controlesFactura;
         
         /// <summary>
+        /// ModoRapido control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ModoRapido;
+        
+        /// <summary>
+        /// txt_MRcantidad control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_MRcantidad;
+        
+        /// <summary>
+        /// txt_MRcodigobarra control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_MRcodigobarra;
+        
+        /// <summary>
         /// Factura_Tipo control.
         /// </summary>
         /// <remarks>
@@ -308,5 +335,14 @@ namespace Christoc.Modules.Facturacion3 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField IdCliente;
+        
+        /// <summary>
+        /// HF_ModoRapido control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HF_ModoRapido;
     }
 }

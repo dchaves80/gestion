@@ -75,6 +75,25 @@ namespace Christoc.Modules.Facturacion3
             }
         }
 
+        void AgregarArticulo(string ArtCod, string cant)
+        {
+            if (Session[key_session_factura] != null)
+            {
+                try
+                {
+                    Data2.Class.Struct_Factura SF = Session[key_session_factura] as Data2.Class.Struct_Factura;
+
+
+
+                    SF.AddDetail(ArtCod);
+                    SF.GetDetalle()[SF.GetDetalle().Count - 1].set_cant(cant.ToString());
+                    redirecttome();
+
+                }
+                catch { }
+            }
+        }
+
 
 
 
@@ -103,6 +122,15 @@ namespace Christoc.Modules.Facturacion3
                 try
                 {
                     AgregarArticulo(int.Parse(Request["addart"].ToString()), Request["cant"].ToString());
+                }
+                catch { }
+            }
+
+            if (Request["addartcod"] != null && Request["cant"] != null)
+            {
+                try
+                {
+                    AgregarArticulo(Request["addartcod"].ToString(), Request["cant"].ToString());
                 }
                 catch { }
             }
@@ -384,6 +412,8 @@ namespace Christoc.Modules.Facturacion3
 
         private void ConfigurarControlesFactura()
         {
+
+
             btn_NuevaVenta.Visible = false;
             btn_CancelarVenta.Visible = true;
             controlesFactura.Visible = true;
@@ -405,7 +435,16 @@ namespace Christoc.Modules.Facturacion3
 
             }
 
-
+            if (Data2.Class.Struct_UserConfig.getUserConfig(UserId).MostrarKiosco == true)
+            {
+                ModoRapido.Visible = true;
+                HF_ModoRapido.Value = "1";
+            }
+            else 
+            {
+                ModoRapido.Visible = false;
+                HF_ModoRapido.Value = "0";
+            }
 
 
         }

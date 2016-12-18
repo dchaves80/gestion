@@ -473,6 +473,11 @@ namespace Data2.Class
             MiDetalle.Add(new Struct_DetalleFactura(IdProducto,UserId));
         }
 
+        public void AddDetail(string CodeProducto)
+        {
+            MiDetalle.Add(new Struct_DetalleFactura(CodeProducto, UserId));
+        }
+
         /*public void RemoveDetail(int IdDetail) 
         {
             for (int a = 0; a < MiDetalle.Count; a++) 

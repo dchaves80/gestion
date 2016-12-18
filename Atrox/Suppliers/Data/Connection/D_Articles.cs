@@ -90,6 +90,21 @@ namespace Data2.Connection
             }
         }
 
+        public static DataRow SelectSingleArticle(int p_IdUser, string Codes)
+        {
+            GestionDataSet.select_singlearticlebaseByCodesDataTable DT = new GestionDataSet.select_singlearticlebaseByCodesDataTable();
+            GestionDataSetTableAdapters.select_singlearticlebaseByCodesTableAdapter TA = new GestionDataSetTableAdapters.select_singlearticlebaseByCodesTableAdapter();
+            TA.Fill(DT, p_IdUser, Codes);
+            if (DT.Rows.Count > 0)
+            {
+                return DT.Rows[0];
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public static DataRow SelectSingleArticle(int p_IdUser,int p_IdProveedor,string p_CodigoInterno) 
         {
             GestionDataSet.select_singleArticleDataTable DT = new GestionDataSet.select_singleArticleDataTable();

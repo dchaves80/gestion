@@ -25,10 +25,10 @@ namespace Data2.Connection
             }
         }
 
-        public bool Update_UserConfig(int IdUser, string nombreNegocio, bool MostrarLogo, string facturaPorDefecto, string PIN)
+        public bool Update_UserConfig(int IdUser, string nombreNegocio, bool MostrarLogo, string facturaPorDefecto, string PIN, bool Kiosco)
         {
             GestionDataSetTableAdapters.QueriesTableAdapter QTA = new GestionDataSetTableAdapters.QueriesTableAdapter();
-            if (QTA.UPDATE_UserConfiguration(IdUser, nombreNegocio, MostrarLogo, facturaPorDefecto, PIN) > 0)
+            if (QTA.UPDATE_UserConfiguration(IdUser, nombreNegocio, MostrarLogo, facturaPorDefecto, PIN, Kiosco) > 0)
             {
                 return true;
             }
@@ -39,10 +39,10 @@ namespace Data2.Connection
 
         }
 
-        public bool Insert_UserConfig(int IdUser, string nombreNegocio,bool MostrarLogo, string facturaPorDefecto, string PIN) 
+        public bool Insert_UserConfig(int IdUser, string nombreNegocio,bool MostrarLogo, string facturaPorDefecto, string PIN, bool Kiosco) 
         {
             GestionDataSetTableAdapters.QueriesTableAdapter QTA = new GestionDataSetTableAdapters.QueriesTableAdapter();
-            if (QTA.InsertUserConfiguration(IdUser, nombreNegocio, MostrarLogo, facturaPorDefecto, PIN) > 0)
+            if (QTA.InsertUserConfiguration(IdUser, nombreNegocio, MostrarLogo, facturaPorDefecto, PIN, Kiosco) > 0)
             {
                 return true;
             }

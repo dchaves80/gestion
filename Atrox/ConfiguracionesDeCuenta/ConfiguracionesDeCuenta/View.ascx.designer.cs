@@ -157,6 +157,15 @@ namespace Christoc.Modules.ConfiguracionesDeCuenta {
         protected global::System.Web.UI.WebControls.CheckBox chk_MostrarLogoNegocio;
         
         /// <summary>
+        /// chk_HabilitarKiosco control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chk_HabilitarKiosco;
+        
+        /// <summary>
         /// btnGuardarConfigNegocio control.
         /// </summary>
         /// <remarks>
