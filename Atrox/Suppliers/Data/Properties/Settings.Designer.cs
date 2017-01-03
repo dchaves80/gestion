@@ -64,5 +64,25 @@ namespace Data2.Properties {
                 return ((string)(this["GestionConnectionString_REMOTE_"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=IRMA-PC\\SQLCLOVERFIELD;Initial Catalog=Gestion;User ID=sa;Password=Cl" +
+            "overfield161185")]
+        public string LOCAL {
+            get {
+                return ((string)(this["LOCAL"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=managerdenegocios.com;Initial Catalog=GestionSystem;User ID=UserGesti" +
+            "on;Password=Sealab2021!")]
+        public string REMOTE {
+            get {
+                return ((string)(this["REMOTE"]));
+            }
+        }
     }
 }

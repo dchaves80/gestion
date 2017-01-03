@@ -28,5 +28,11 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=managerdenegocios.com;Initial Catalog=GestionSystem;User ID=UserGestion;Password=Sealab2021!</Value>
     </Setting>
+    <Setting Name="LOCAL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Data Source=IRMA-PC\SQLCLOVERFIELD;Initial Catalog=Gestion;User ID=sa;Password=Cloverfield161185</Value>
+    </Setting>
+    <Setting Name="REMOTE" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Data Source=managerdenegocios.com;Initial Catalog=GestionSystem;User ID=UserGestion;Password=Sealab2021!</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

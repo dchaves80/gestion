@@ -10,21 +10,41 @@ namespace Data2.Connection
     public class D_Factura
     {
 
-        public DataTable GetFacturasBetweenDates(int Iduser, DateTime Start, DateTime End,String TIPO, bool Printed) 
+        public List<DataTable> GetFacturasBetweenDates(int Iduser, DateTime Start, DateTime End,String TIPO, bool Printed) 
         {
             
+
             GestionDataSetTableAdapters.SELECT_FACTURASBetweenDatesTableAdapter TA = new GestionDataSetTableAdapters.SELECT_FACTURASBetweenDatesTableAdapter();
             GestionDataSet.SELECT_FACTURASBetweenDatesDataTable DT = new GestionDataSet.SELECT_FACTURASBetweenDatesDataTable();
+            GestionDataSet.SELECT_FACTURASBetweenDatesDataTable DT2 = new GestionDataSet.SELECT_FACTURASBetweenDatesDataTable();
+            
+
+            List<DataTable> DT_List = new List<DataTable>();
+            DataSet D;
             
             TA.Fill(DT, Iduser, Statics.Conversion.DateTimeToSql(Start), Statics.Conversion.DateTimeToSql(End), TIPO, Printed);
             if (DT.Rows.Count > 0)
             {
-                return DT;
+
+
+                DT_List.Add(DT);
+
+
             }
             else 
             {
-                return null;
+                DT_List.Add(null);
             }
+                TA.Fill(DT2,Iduser, Statics.Conversion.DateTimeToSql(Start), Statics.Conversion.DateTimeToSql(End),"100",Printed);
+                if (DT2.Rows.Count > 0) 
+                {
+                    DT_List.Add(DT2);
+                }
+                else
+                {
+                    DT_List.Add(null);
+                }
+                return DT_List;
         }
 
         public void InsertarDetalleFactura(Class.Struct_Factura p_F) 

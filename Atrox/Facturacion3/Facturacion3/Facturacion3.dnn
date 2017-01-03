@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="Facturacion3" type="Module" version="05.00.00">
+    <package name="Facturacion3" type="Module" version="06.00.00">
       <friendlyName>Facturacion3</friendlyName>
       <description>Christoc.com Facturacion3 module</description>
       <iconFile>Images/icon_extensions.gif</iconFile>

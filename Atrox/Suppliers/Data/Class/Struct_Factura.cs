@@ -14,6 +14,12 @@ namespace Data2.Class
     public class Struct_Factura
     {
 
+        //Para Parseo a comprobante.
+        public bool IsRemito=false;
+        public Struct_Remito Remito;
+        //Para Parseo a comprobante.
+
+
         public enum TipoDeFactura { Null ,FacturaA, FacturaB, FacturaC, Presupuesto, FacturaX};
         public enum CondicionIVA { RespInscripto, RespNoInscripto, Exento, ConsumidorFinal, RespMonotributo }
         public enum CondicionPago { Contado, CtaCte }
@@ -344,21 +350,37 @@ namespace Data2.Class
                 default: T = "0"; break;
             }
             Data2.Connection.D_Factura Conn = new Connection.D_Factura();
-            
-            DataTable DT = Conn.GetFacturasBetweenDates(p_UserID, START, END,T,p_printed);
-            if (DT != null)
+            List<Struct_Factura> FL = new List<Struct_Factura>();
+            List<DataTable>  DT_L = Conn.GetFacturasBetweenDates(p_UserID, START, END,T,p_printed);
+            if (DT_L[0] != null)
             {
-                List<Struct_Factura> FL = new List<Struct_Factura>();
-                foreach (DataRow R in DT.Rows)
+                
+                foreach (DataRow R in DT_L[0].Rows)
                 {
                     FL.Add(new Struct_Factura(R));
                 }
-                return FL;
             }
-            else 
+
+            if (DT_L[1] != null) 
+            {
+              foreach (DataRow R in DT_L[1].Rows)
+                {
+                    Struct_Remito _Remito = new Struct_Remito(R);
+                    Struct_Factura _F = new Struct_Factura(_Remito);
+                    FL.Add(_F);
+                }   
+            }
+
+
+            if (FL.Count > 0) 
+            {
+                return FL;
+            } else
             {
                 return null;
             }
+
+            
         }
 
         public Struct_Factura(DataRow dr) 
@@ -422,6 +444,12 @@ namespace Data2.Class
                 
                 }
             }
+        }
+
+        public Struct_Factura(Struct_Remito RemitoToParse)
+        {
+            IsRemito = true;
+            Remito = RemitoToParse;
         }
 
         public Struct_Factura(int p_userId) 

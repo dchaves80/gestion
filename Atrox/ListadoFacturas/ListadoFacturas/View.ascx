@@ -18,9 +18,11 @@
             <asp:ListItem Text="Factura C" Value="C" />
             <asp:ListItem Text="Factura X" Value="X" />
             <asp:ListItem Text="Presupuesto" Value="P" />
+            
 
         </asp:DropDownList><br />
         <asp:Button runat="server" Text="Buscar Facturas" ID="btnBuscar" CssClass="FormButton FirstElement LastElement" onclick="btnBuscar_Click"/>
+        <asp:Button runat="server" Text="Buscar Remitos" ID="btnBuscarRemitos" CssClass="FormButton FirstElement LastElement" onclick="btnBuscarRemitos_Click"/>
     </div>
 
 
@@ -113,7 +115,7 @@
     }
 
     
-    A_labels.push('Fact. A', 'Fact. B', 'Fact. C', 'Fact. X', 'Presup.');
+    A_labels.push('Fact. A', 'Fact. B', 'Fact. C', 'Fact. X', 'Presup.', "Remitos");
     
 
 
@@ -127,14 +129,16 @@
                     "#36A2EB",
                     "#FFCE56",
                     "#FF6384",
-                    "#36A2EB"
+                    "#36A2EB",
+                    "#FF6384"
                 ],
                 hoverBackgroundColor: [
                     "#FF6384",
                     "#36A2EB",
                     "#FFCE56",
                     "#FF6384",
-                    "#36A2EB"
+                    "#36A2EB",
+                    "#FF6384"
                 ]
             }]
     };
@@ -142,7 +146,7 @@
     var mypiechart = new Chart(chartinvar,
         {
             type: 'horizontalBar',
-            labels: ['Fact. A', 'Fact. B', 'Fact. C', 'Fact. X', 'Presup'],
+            labels: ['Fact. A', 'Fact. B', 'Fact. C', 'Fact. X', 'Presup', 'Remitos'],
             data: data,
             animation: {
                 animateScale: true

@@ -1,4 +1,5 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="View.ascx.cs" Inherits="Christoc.Modules.Facturacion3.View" %>
+﻿
+<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="View.ascx.cs" Inherits="Christoc.Modules.Facturacion3.View" %>
 <div>
     <asp:Button Text="Nueva Venta" runat="server" ID="btn_NuevaVenta" CssClass="FormButton FirstElement LastElement" OnClientClick="NewFactura()" OnClick="btn_NuevaVenta_Click" />
 

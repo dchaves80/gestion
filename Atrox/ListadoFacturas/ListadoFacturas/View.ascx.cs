@@ -173,6 +173,8 @@ namespace Christoc.Modules.ListadoFacturas
         {
             
             List<Data2.Class.Struct_Factura> _LF = Session[sessionkey] as List<Data2.Class.Struct_Factura>;
+            List<Data2.Class.Struct_Remito> _LR = Struct_Remito.GetAllRemitos(UserId);
+
             if (_LF != null && _LF.Count > 0)
             {
                 HF_Data.Value = "1";
@@ -181,6 +183,13 @@ namespace Christoc.Modules.ListadoFacturas
                 int _FC = 0;
                 int _FX = 0;
                 int _FP = 0;
+                int _R = 0;
+
+                if (_LR != null) 
+                {
+                    _R = _LR.Count;
+                }
+
                 for (int a = 0; a < _LF.Count; a++)
                 {
                     switch (_LF[a].FacturaTipo)
@@ -203,9 +212,8 @@ namespace Christoc.Modules.ListadoFacturas
                     }
                 }
 
-                HF_DataCant.Value = _FA.ToString() + "," + _FB.ToString() + "," + _FC.ToString() + "," + _FX.ToString() + "," + _FP.ToString();
-
-                HF_DataTitle.Value = "Facturas periodo:" + _LF[0].Fecha.ToShortDateString() + "-" + _LF[_LF.Count - 1].Fecha.ToShortDateString();
+                HF_DataCant.Value = _FA.ToString() + "," + _FB.ToString() + "," + _FC.ToString() + "," + _FX.ToString() + "," + _FP.ToString() + "," + _R.ToString();
+                HF_DataTitle.Value = "Comprobantes periodo:" + _LF[0].Fecha.ToShortDateString() + "-" + _LF[_LF.Count - 1].Fecha.ToShortDateString();
             }
             else 
             {
@@ -253,14 +261,24 @@ namespace Christoc.Modules.ListadoFacturas
 
                     string facturatipo = "";
                     string infofactura;
-
-                    if (F.FacturaTipo == Struct_Factura.TipoDeFactura.FacturaA) facturatipo = "A";
-                    if (F.FacturaTipo == Struct_Factura.TipoDeFactura.FacturaB) facturatipo = "B";
-                    if (F.FacturaTipo == Struct_Factura.TipoDeFactura.FacturaC) facturatipo = "C";
-                    if (F.FacturaTipo == Struct_Factura.TipoDeFactura.FacturaX) facturatipo = "X";
-                    if (F.FacturaTipo == Struct_Factura.TipoDeFactura.Presupuesto) facturatipo = "P";
+                    if (!F.IsRemito)
+                    {
+                        if (F.FacturaTipo == Struct_Factura.TipoDeFactura.FacturaA) facturatipo = "A";
+                        if (F.FacturaTipo == Struct_Factura.TipoDeFactura.FacturaB) facturatipo = "B";
+                        if (F.FacturaTipo == Struct_Factura.TipoDeFactura.FacturaC) facturatipo = "C";
+                        if (F.FacturaTipo == Struct_Factura.TipoDeFactura.FacturaX) facturatipo = "X";
+                        if (F.FacturaTipo == Struct_Factura.TipoDeFactura.Presupuesto) facturatipo = "P";
+                    }
+                    else 
+                    {
+                        facturatipo = "R";
+                    }
                     Letter.Attributes.Add("Class", "LetraFactura");
                     string total = F.total.ToString("#.00");
+                    if (F.IsRemito)
+                    {
+                        total = F.Remito.total.ToString("#.00");
+                    }
                     string[] splitters = { ".", "," };
                     string strentero = "00";
                     string strdecimal = "00";
@@ -282,7 +300,14 @@ namespace Christoc.Modules.ListadoFacturas
                         "<br/><b>Total:</b> " +
                         strentero + "<sup>" + strdecimal + "</sup>"+
                         "<br/><b>IID: </b>" + F.Id.ToString();
-
+                    if (F.IsRemito) 
+                    {
+                        infofactura = "<b>Fecha:</b> " +
+                        F.Remito.Fecha.ToShortDateString() +
+                        "<br/><b>Total:</b> " +
+                        strentero + "<sup>" + strdecimal + "</sup>" +
+                        "<br/><b>IID: </b>" + F.Remito.IdRemito.ToString();
+                    }
                     if (F.FacturaTipo == Struct_Factura.TipoDeFactura.FacturaA) 
                     {
                         infofactura += "</br><b>Razon social: </b>" + F.senores;
@@ -345,6 +370,11 @@ namespace Christoc.Modules.ListadoFacturas
             }
 
 
+
+        }
+
+        protected void btnBuscarRemitos_Click(object sender, EventArgs e)
+        {
 
         }
     }
